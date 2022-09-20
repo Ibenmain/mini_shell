@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:00:51 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/28 06:01:22 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/08/30 16:56:10 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../includes/parsing.h"
+#include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 t_execlst	*get_execlst(t_tok *tkns)
 {
@@ -97,4 +99,3 @@ int	add_tknex(t_execlst **token, t_execlst **new)
 	}
 	return (0);
 }
-

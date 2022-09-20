@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 07:38:40 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/19 16:00:21 by ibenmain         ###   ########.fr       */
+/*   Created: 2022/08/29 19:45:32 by ibenmain          #+#    #+#             */
+/*   Updated: 2022/09/03 00:12:21 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
+#include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
-# define EXECUTION_H
-# include "libft.h"
-# include "parsing.h"
-# include "utils_char_str.h"
+char	*find_env(char *path, t_env *data)
+{
+	t_env	*env;
 
-#endif
+	env = data;
+	if (path)
+	{
+		while (env)
+		{
+			if (!ft_strcmp(path, env->var))
+				return (env->val);
+			env = env->next;
+		}
+	}
+	return (NULL);
+}

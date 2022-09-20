@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/28 16:31:49 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:08:05 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 t_execlst	*init_execlst(void)
 {

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 03:48:42 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/28 16:30:44 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/03 16:44:17 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../includes/libft.h"
+#include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 char	*getval(char *s, int start, int len)
 {
@@ -62,35 +64,22 @@ char	*concat(char *s1, char *s2)
 
 	if (!s2)
 		return (NULL);
+	if (!s1)
+		s1 = "";
 	i = 0;
 	j = 0;
 	new = NULL;
-	if (s1 && s2)
-	{
-		while (s1[i])
-			i++;
-		while (s2[j])
-			j++;
-		new = malloc(i + j);
-		if (!new)
-			return (NULL);
-		new[i + j] = CHR_END;
-		while (--j >= 0)
-			new[i + j] = s2[j];
-		while (--i >= 0)
-			new[i] = s1[i];
-	}
+	while (s1[i])
+		i++;
+	while (s2[j])
+		j++;
+	new = malloc(i + j);
+	if (!new)
+		return (NULL);
+	new[i + j] = CHR_END;
+	while (--j >= 0)
+		new[i + j] = s2[j];
+	while (--i >= 0)
+		new[i] = s1[i];
 	return (new);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s)
-	{
-		while (*s)
-		{
-			write(fd, s, 1);
-			s++;
-		}
-	}
 }

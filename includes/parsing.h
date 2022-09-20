@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/28 05:14:05 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/20 15:22:27 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 
 # define PARSING_H
-# include"libft.h"
+# include "libft.h"
+# include "utils_char_str.h"
+# include "execution.h"
 
 /**
  * @brief 
@@ -33,7 +35,6 @@ typedef enum s_enum
 	APPND,
 	NON,
 }t_enum;
-
 
 /**
  * @brief
@@ -77,6 +78,12 @@ typedef struct s_execlst
 	struct s_execlst	*next;
 }t_execlst;
 
+typedef struct s_env{
+	char			*var;
+	char			*val;
+	struct s_env	*next;
+}	t_env;
+
 //free memory
 void		ft_lstclear(t_tok **lst);
 void		clear_execlst(t_execlst **lst);
@@ -104,5 +111,27 @@ t_red		*getredlst(t_red *red, t_tok *tok);
 t_enum		get_redtype(char *val);
 t_execlst	*getcmd(t_execlst *e, char *val);
 t_execlst	*init_execlst(void);
-
+//--------------------
+void		desplay_shell(t_tok *tokens, t_execlst *el, char **data);
+char		*exec_hrdc(t_red *red);
+t_env		*init_env(char **env);
+void		ft_lstadd_back(t_env **alst, t_env *new);
+void		ft_its_builtins(t_execlst *data, t_env *env);
+//--------builtins------------
+char		*creat_tmp_file(char *file);
+void		ft_built_pwd(char *str);
+void		ft_built_env(t_env *data);
+void		ft_built_cd(char **str, t_env *env);
+void		ft_built_echo(char **str);
+char		*find_env(char *path, t_env *data);
+int			ft_check_newline(char *str);
+void		ft_built_exit(char **str);
+int			ft_add_variable(char *cmd, t_env *env);
+int			is_valide(char *cmd, int i);
+void		sort_and_print(t_env *env);
+void		ft_print_tab(t_env *env);
+void		ft_add_to_env(char *var, char *val, t_env *env, bool plus);
+void		ft_built_unset(char **str, t_env *data);
+void		ft_built_export(char **cmd, t_env *env);
+int			ft_lstsize(t_env *lst);
 #endif

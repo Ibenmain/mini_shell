@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:26:05 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/27 08:35:23 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:08:55 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 int	skipquotes(char *line)
 {

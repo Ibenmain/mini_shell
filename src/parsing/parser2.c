@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:11:22 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/27 08:13:28 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:08:45 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 t_tok	*lstnew(char *content, t_enum type)
 {

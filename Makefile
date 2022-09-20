@@ -2,14 +2,20 @@ NAME = minishell
 INC = includes/libft.h includes/parsing.h \
 	includes/utils_char_str.h includes/execution.h
 
-SRCS = src/libft/utils1.c src/libft/utils2.c src/libft/utils3.c \
+SRCS = src/libft/utils1.c src/libft/utils2.c src/libft/utils3.c src/libft/utils4.c \
 	src/parsing/tokenizer.c src/parsing/parser1.c src/parsing/parser2.c \
 	src/parsing/exec_list_utils1.c src/parsing/exec_list_utils2.c \
-	src/execution/exec_redirections1.c src/main.c
+	src/execution/exec_redirections1.c src/main.c \
+	src/environment/environment.c src/builtins/its_builtins.c \
+	src/builtins/built_env.c src/builtins/built_pwd.c \
+	src/builtins/built_cd.c src/builtins/built_exit.c \
+	src/builtins/built_echo.c src/environment/get_env.c \
+	src/builtins/built_unset.c src/builtins/built_export.c \
+	src/builtins/other_built_export.c 
 
 CFLAGS = -Wall -Werror -Wextra -g
 CC = cc
-RM = rm
+RM = rm -rf
 READLINE = -lreadline
 OBJS = $(SRCS:.c=.o)
 
