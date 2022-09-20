@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_list_utils1.c                                 :+:      :+:    :+:   */
+/*   exec_list_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/28 16:31:49 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/08/27 01:10:21 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
+#include "../../includes/minishell.h"
+void	free_arr2d(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+}
+
+
 
 t_execlst	*init_execlst(void)
 {
@@ -30,7 +40,6 @@ t_execlst	*getcmd(t_execlst *e, char *val)
 {
 	int		i;
 	char	**new;
-
 	if (!e)
 		e = init_execlst();
 	if (!e)
@@ -43,7 +52,7 @@ t_execlst	*getcmd(t_execlst *e, char *val)
 	new[i] = val;
 	while (--i >= 0 && e->cmd[i])
 	{
-		new[i] = e->cmd[i]/*expender(e->cmd[i])*/;//TODO add expender
+		new[i] = e->cmd[i];
 		e->cmd[i] = NULL;
 	}
 	return (free(e->cmd), e->cmd = new, e);
@@ -90,6 +99,11 @@ t_red	*getredlst(t_red *red, t_tok *tok)
 	return (red);
 }
 
+char	*exec_hrdc(t_red *red)
+{
+	return (red->file);
+}
+
 t_execlst	*getred(t_execlst *e, t_tok *tok)
 {
 	t_red	*t;
@@ -103,14 +117,87 @@ t_execlst	*getred(t_execlst *e, t_tok *tok)
 	while (t)
 	{
 		if (t->type == HEREDC)
-		{
-			if (ft_strchr(t->file, CHR_D_QT) || ft_strchr(t->file, CHR_S_QT))
-				t->dlmtr = 0;
-			else
-				t->dlmtr = 1;
-		}
-		exec_hrdc(e->red);
+			t->file = exec_hrdc(t);
 		t = t->next;
 	}
 	return (e);
 }
+
+void	clear_exec_lst(t_execlst *lst)
+{
+	t_execlst	*tmp;
+
+	tmp = lst;
+	while (lst)
+	{
+		tmp = lst->next;
+		free_arr2d(lst->cmd);
+		
+	}
+}
+
+t_execlst	*get_execlst(t_tok *tkns)
+{
+	t_tok		*tmp;
+	t_execlst	*exec;
+	t_execlst	*hpex;
+	exec = NULL;
+	hpex = NULL;
+	tmp = tkns;
+	while (tmp)
+	{
+		if (tmp->type == WORD || tmp->type == D_QTE || tmp->type == S_QTE)
+		{
+			hpex = getcmd(hpex, tmp->value);
+		}
+		else if (tmp->type == RED)
+		{
+			hpex = getred(hpex, tmp);
+			tmp = tmp->next;
+		}
+		if (!hpex)
+			return (NULL);
+		if (tmp->type == PIPE || !tmp->next)
+			if (add_tknex(&exec, &hpex))
+				return (NULL);
+		tmp = tmp->next;
+	}
+	return (exec);
+}
+
+
+
+void	free_red(t_red **red)
+{
+	t_red	*tmp;
+
+	if (red)
+	{
+		while (*red)
+		{
+			tmp = (*red)->next;
+			//free((*red)->file);
+			free(*red);
+			*red = tmp;
+		}
+	}	
+}
+
+void	clear_execlst(t_execlst **lst)
+{
+	t_execlst	*tmp;
+	if (lst)
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			free((*lst)->cmd);
+			free_red(&(*lst)->red);
+			free(*lst);
+			*lst = tmp;
+		}
+	}
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+

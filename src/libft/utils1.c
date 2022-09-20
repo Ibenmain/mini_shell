@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:15:29 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:38:26 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/08/27 08:15:02 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
 #include "../../includes/libft.h"
 
 int	ft_strlen(char *str)

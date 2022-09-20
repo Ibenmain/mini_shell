@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/03 00:02:04 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/08/28 05:47:05 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 #include "../includes/libft.h"
 #include<string.h>
 
-void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
+void	desplay_shell(void)
 {
-	char	*line;
-	t_env	*env;
+	char		*line;
+	t_tok		*tokens;
+	t_execlst	*el;
 
-	env = init_env(data);
-	if (!env)
-		return ;
 	while (1)
 	{
 		line = readline(STR_PROMPT);
@@ -36,7 +34,6 @@ void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 				if (!check_syntax(tokens))
 				{
 					el = get_execlst(tokens);
-					ft_its_builtins(el, env);
 					clear_execlst(&el);
 				}
 				ft_lstclear(&tokens);
@@ -46,12 +43,8 @@ void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 	}
 }
 
-int	main(int argc, char **argv, char **data)
-{
-	t_tok		tokens;
-	t_execlst	el;
 
-	(void)argc;
-	(void)argv;
-	desplay_shell(&tokens, &el, data);
+int	main(void)
+{
+	desplay_shell();
 }

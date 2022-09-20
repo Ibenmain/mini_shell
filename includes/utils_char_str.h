@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_char_str.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:33:48 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:41:21 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/08/27 08:51:41 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define CHR_S_QT '\''
 # define CHR_D_QT '\"'
 # define CHR_END '\0' 
-# define CHR_EQL '=' 
 
 # define STR_SPC " "
 # define STR_OUTR ">"
