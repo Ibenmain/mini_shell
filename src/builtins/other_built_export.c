@@ -6,13 +6,26 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:06:48 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/20 16:05:45 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:28:36 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include "../../includes/execution.h"
 #include "../../includes/libft.h"
+
+int	check_egale(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_print_tab(t_env *env)
 {
@@ -21,17 +34,10 @@ void	ft_print_tab(t_env *env)
 	data = env;
 	while (data)
 	{
-		if (!data->val)
-		{
-			ft_putstr_fd(data->var, 1);
-			write(1, "\n", 1);
-		}
-		else
-		{
-			ft_putstr_fd(data->var, 1);
-			ft_putchar_fd(CHR_EQL, 1);
-			ft_putendl_fd(data->val, 1);
-		}
+		printf("declare -x %s", data->var);
+		if (data->val)
+			printf("=\"%s\"", data->val);
+		printf("\n");
 		data = data->next;
 	}
 }

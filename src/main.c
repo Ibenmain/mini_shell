@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/03 00:02:04 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:45:24 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 				if (!check_syntax(tokens))
 				{
 					el = get_execlst(tokens);
-					ft_its_builtins(el, env);
+					ft_executer_cmd(el, env);
 					clear_execlst(&el);
 				}
 				ft_lstclear(&tokens);

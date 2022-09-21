@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/20 10:31:09 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:54:38 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
-int 	ft_isalpha(int c);
+int		ft_isalpha(int c);
+char	**ft_split(char *s, char c);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 #endif

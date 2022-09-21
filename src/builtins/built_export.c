@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/20 15:21:35 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:14:39 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	ft_add_variable(char *cmd, t_env *env)
 	if (cmd[i] == '\0')
 		val = NULL;
 	else if (cmd[i] == '+')
-		val = ft_substr(cmd, i + 2, ft_strlen(cmd) - i);
+		val = ft_substr(cmd, i + 2, ft_strlen(cmd) - i - 2);
 	else
-		val = ft_substr(cmd, i + 1, ft_strlen(cmd) - i);
+		val = ft_substr(cmd, i + 1, ft_strlen(cmd) - i - 1);
 	ft_add_to_env(var, val, env, (cmd[i] == '+'));
 	return (1);
 }
@@ -102,12 +102,10 @@ int	ft_add_variable(char *cmd, t_env *env)
 void	ft_built_export(char **cmd, t_env *env)
 {
 	t_env	*tmp;
-	//char	**tab;
 	int		i;
 
 	i = 0;
 	tmp = env;
-	//tab = ft_cmp_env(tmp);
 	if (!cmd[1])
 		sort_and_print(tmp);
 	else

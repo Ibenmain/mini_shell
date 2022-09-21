@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:06:04 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/20 16:05:33 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:28:18 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ void	ft_putendl_fd(char *s, int fd)
 	i = 0;
 	if (!s)
 		return ;
-	write(fd, "\"", 1);
 	while (s[i])
 		write(fd, &s[i++], 1);
-	write(fd, "\"\n", 2);
+	write(fd, "\n", 1);
 }
 
 int	ft_isalpha(int c)

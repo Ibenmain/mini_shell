@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/20 15:22:27 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:24:32 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,12 @@ t_red		*getredlst(t_red *red, t_tok *tok);
 t_enum		get_redtype(char *val);
 t_execlst	*getcmd(t_execlst *e, char *val);
 t_execlst	*init_execlst(void);
-//--------------------
+//---------------------------
 void		desplay_shell(t_tok *tokens, t_execlst *el, char **data);
 char		*exec_hrdc(t_red *red);
 t_env		*init_env(char **env);
 void		ft_lstadd_back(t_env **alst, t_env *new);
-void		ft_its_builtins(t_execlst *data, t_env *env);
+int			ft_its_builtins(t_execlst *data, t_env *env);
 //--------builtins------------
 char		*creat_tmp_file(char *file);
 void		ft_built_pwd(char *str);
@@ -134,4 +134,6 @@ void		ft_add_to_env(char *var, char *val, t_env *env, bool plus);
 void		ft_built_unset(char **str, t_env *data);
 void		ft_built_export(char **cmd, t_env *env);
 int			ft_lstsize(t_env *lst);
+//--------execution------------
+void		ft_executer_cmd(t_execlst *el, t_env *env);
 #endif
