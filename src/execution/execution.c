@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 00:23:06 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 11:37:44 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**ft_copy_env(t_env *env)
 	return (tab);
 }
 
-void	exec_other_cmd(t_execlst *data, t_env *env)
+void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 {
 	char	**tmp_cmd;
 	char	**env_tab;
@@ -90,6 +90,14 @@ void	exec_other_cmd(t_execlst *data, t_env *env)
 	i = -1;
 	tmp_cmd = data->cmd;
 	env_tab = ft_copy_env(env);
+	if (data->next)
+	{
+		dup2(fd[1], 1);
+		close(fd[1]);
+		close(fd[0]);
+	}
+	if (!ft_its_builtins(data, env))
+		return ;
 	if (!tmp_cmd[0] || !*tmp_cmd[0] || !env)
 		return ;
 	path = find_env("PATH", env);
@@ -104,15 +112,11 @@ void	exec_other_cmd(t_execlst *data, t_env *env)
 	exit (1);
 }
 
-void	ft_executer_cmd(t_execlst *el, t_env *env)
+void	ft_cmd_to_exec(t_execlst *el, t_env *env)
 {
 	int			id;
-	int			input;
 	int			fd[2];
 
-	input = dup(0);
-	if (el && !el->next && !ft_its_builtins(el, env))
-		return ;
 	while (el)
 	{
 		if (el->next)
@@ -121,19 +125,32 @@ void	ft_executer_cmd(t_execlst *el, t_env *env)
 		if (id < 0)
 			return (perror("fork"));
 		if (id == 0)
+			exec_other_cmd(el, env, fd);
+		if (el->next)
 		{
-			exec_other_cmd(el, env);
-			if (el->next)
-			{
-				dup2(fd[0], 0);
-				close(fd[0]);
-				close(fd[1]);
-			}
-			else
-				close(0);
+			dup2(fd[0], 0);
+			close(fd[0]);
+			close(fd[1]);
 		}
 		else
-			wait(0);
+			close(0);
 		el = el->next;
 	}
+}
+
+void	ft_executer_cmd(t_execlst *el, t_env *env)
+{
+	int			input;
+	int			status;
+
+	input = dup(0);
+	if (el && !el->next && !ft_its_builtins(el, env))
+		return ;
+	ft_cmd_to_exec(el, env);
+	while (el)
+	{
+		wait(&status);
+		el = el->next;
+	}
+	dup2(input, 0);
 }
