@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 00:11:20 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 01:23:33 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:51:24 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_env	*ft_creat_node(char *data)
 	env->val = ft_val(data);
 	if (!env->val)
 		return (NULL);
+	if (!ft_strcmp(env->var, "SHLVL"))
+		env->val = ft_itoa(ft_atoi(env->val) + 1);
 	env->next = NULL;
 	return (env);
 }
@@ -73,9 +75,17 @@ t_env	*init_env(char **env)
 {
 	int		i;
 	t_env	*head;
+	char	s[1024];
 
 	i = 0;
 	head = NULL;
+	if (!env || !*env)
+	{
+		ft_lstadd_back(&head, ft_creat_node(ft_strjoin("PWD", \
+			getcwd(s, 1024))));
+		ft_lstadd_back(&head, ft_creat_node(ft_strjoin("SHLVL", "2")));
+		return (head);
+	}
 	while (env[i])
 	{
 		ft_lstadd_back(&head, ft_creat_node(env[i]));

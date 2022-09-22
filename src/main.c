@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/22 01:23:40 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:10:18 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 #include "../includes/libft.h"
 #include<string.h>
 
-t_env	*add_to_envirenemt()
-{
-	t_env	*head;
+// t_env	*add_to_envirenemt()
+// {
+// 	t_env	*head;
 
-	head = NULL;
-	ft_lstadd_back(&head, ft_creat_node(ft_strjoin("PWD", getcwd(NULL, 0))));
-	ft_lstadd_back(&head, ft_creat_node(ft_strjoin("SHLVL", "1")));
-	ft_lstadd_back(&head, ft_creat_node(ft_strjoin("_", "/usr/bin/env")));
-	return (head);
-}
+// 	head = NULL;
+// 	ft_lstadd_back(&head, ft_creat_node(ft_strjoin("PWD", getcwd(NULL, 0))));
+// 	ft_lstadd_back(&head, ft_creat_node(ft_strjoin("SHLVL", "1")));
+// 	// ft_lstadd_back(&head, ft_creat_node(ft_strjoin("_", "/usr/bin/env")));
+// 	return (head);
+// }
 
 void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 {
@@ -32,8 +32,8 @@ void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 	t_env	*env;
 
 	env = init_env(data);
-	if (!env)
-		env = add_to_envirenemt();
+	// if (!env)
+	// 	env = add_to_envirenemt();
 	while (1)
 	{
 		line = readline(STR_PROMPT);

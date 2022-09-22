@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 11:11:33 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:14:56 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	ft_not_builtin(char *cmd)
 {
-	if (!ft_strcmp(cmd, "PWD") || !ft_strcmp(cmd, "env") || \
+	if (!ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "env") || \
 		!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "echo") || \
 		!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset") || \
 		!ft_strcmp(cmd, "exit"))

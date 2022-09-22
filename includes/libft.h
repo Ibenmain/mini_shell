@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/21 22:45:20 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:57:33 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_strchr(char *s, char c);
 char	*ft_strtrim(char *s1, char *set);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *str);
+char	*ft_itoa(int n);
 char	*concat(char *s1, char *s2);
 char	*ft_itoa(int n);
 void	free_arr2d(char **arr);

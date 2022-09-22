@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 11:37:44 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:29:26 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,42 @@ char	**ft_copy_env(t_env *env)
 	return (tab);
 }
 
-void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
+char	*ft_get_path_of_cmd(char *word, t_env *env)
 {
-	char	**tmp_cmd;
-	char	**env_tab;
 	char	*path;
 	char	**tab;
 	int		i;
 
 	i = -1;
+	if (!word || !env)
+		return (NULL);
+	if (access(word, F_OK) == 0)
+		return (word);
+	path = find_env("PATH", env);
+	if (!path)
+	{
+		printf("Minishell: %s: command not found\n", word);
+		exit (1);
+	}
+	tab = ft_split(path, ':');
+	while (tab[++i])
+	{
+		tab[i] = ft_add_slache(tab[i], '/');
+		tab[i] = concat(tab[i], word);
+		if (access(tab[i], F_OK) == 0)
+			return (tab[i]);
+	}
+	return (NULL);
+}
+
+void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
+{
+	char	**tmp_cmd;
+	char	**env_tab;
+	char	*path;
+
+	if (!data->cmd || !data->cmd[0])
+		return ;
 	tmp_cmd = data->cmd;
 	env_tab = ft_copy_env(env);
 	if (data->next)
@@ -98,18 +125,13 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 	}
 	if (!ft_its_builtins(data, env))
 		return ;
-	if (!tmp_cmd[0] || !*tmp_cmd[0] || !env)
-		return ;
-	path = find_env("PATH", env);
-	tab = ft_split(path, ':');
-	while (tab[++i])
+	path = ft_get_path_of_cmd(tmp_cmd[0], env);
+	if (!tmp_cmd[0])
 	{
-		tab[i] = ft_add_slache(tab[i], '/');
-		tab[i] = concat(tab[i], tmp_cmd[0]);
-		execve(tab[i], tmp_cmd, env_tab);
+		printf("Minishell: %s: command not found\n", tmp_cmd[0]);
+		exit (1);
 	}
-	printf("Minishell: %s: command not found\n", tmp_cmd[0]);
-	exit (1);
+	execve(path, tmp_cmd, env_tab);
 }
 
 void	ft_cmd_to_exec(t_execlst *el, t_env *env)
