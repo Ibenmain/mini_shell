@@ -2,8 +2,8 @@ NAME = minishell
 INC = includes/libft.h includes/parsing.h \
 	includes/utils_char_str.h includes/execution.h
 
-SRCS = src/libft/utils1.c src/libft/utils2.c \
-	src/libft/utils3.c  src/libft/utils4.c src/libft/utils5.c\
+SRCS = src/libft/utils1.c src/libft/utils2.c src/libft/utils3.c\
+	src/libft/utils4.c  src/libft/utils5.c src/libft/utils6.c\
 	src/parsing/tokenizer.c src/parsing/parser1.c src/parsing/parser2.c \
 	src/parsing/exec_list_utils1.c src/parsing/exec_list_utils2.c \
 	src/execution/exec_redirections1.c src/main.c \

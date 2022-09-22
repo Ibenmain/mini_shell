@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/21 15:16:07 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 00:23:06 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,25 +106,34 @@ void	exec_other_cmd(t_execlst *data, t_env *env)
 
 void	ft_executer_cmd(t_execlst *el, t_env *env)
 {
-	t_env		*tmp_env;
-	t_execlst	*tmp_el;
 	int			id;
+	int			input;
+	int			fd[2];
 
-	tmp_env = env;
-	tmp_el = el;
-	if (!ft_its_builtins(tmp_el, tmp_env))
+	input = dup(0);
+	if (el && !el->next && !ft_its_builtins(el, env))
 		return ;
-	while (tmp_el)
+	while (el)
 	{
+		if (el->next)
+			pipe(fd);
 		id = fork();
 		if (id < 0)
 			return (perror("fork"));
 		if (id == 0)
 		{
-			exec_other_cmd(tmp_el, tmp_env);
+			exec_other_cmd(el, env);
+			if (el->next)
+			{
+				dup2(fd[0], 0);
+				close(fd[0]);
+				close(fd[1]);
+			}
+			else
+				close(0);
 		}
 		else
 			wait(0);
-		tmp_el = tmp_el->next;
+		el = el->next;
 	}
 }

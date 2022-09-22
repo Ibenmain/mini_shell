@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/21 14:25:03 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:01:21 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_its_builtins(t_execlst *data, t_env *env)
 	if (!data)
 		return (1);
 	if (!ft_strcmp(data->cmd[0], "pwd"))
-		return (ft_built_pwd(data->cmd[0]), 0);
+		return (ft_built_pwd(data->cmd[0], env), 0);
 	else if (!ft_strcmp(data->cmd[0], "env"))
 		return (ft_built_env(env), 0);
 	else if (!ft_strcmp(data->cmd[0], "cd"))

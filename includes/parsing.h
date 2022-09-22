@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/21 14:24:32 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:05:02 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		ft_lstadd_back(t_env **alst, t_env *new);
 int			ft_its_builtins(t_execlst *data, t_env *env);
 //--------builtins------------
 char		*creat_tmp_file(char *file);
-void		ft_built_pwd(char *str);
+void	ft_built_pwd(char *str, t_env *env);
 void		ft_built_env(t_env *data);
 void		ft_built_cd(char **str, t_env *env);
 void		ft_built_echo(char **str);
@@ -136,4 +136,5 @@ void		ft_built_export(char **cmd, t_env *env);
 int			ft_lstsize(t_env *lst);
 //--------execution------------
 void		ft_executer_cmd(t_execlst *el, t_env *env);
+t_env		*ft_creat_node(char *data);
 #endif
