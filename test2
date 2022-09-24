@@ -32,7 +32,7 @@ READ_LINE_INC = /goinfre/kfaouzi/homebrew/opt/readline/include
 all:$(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $^ $(READLINE) -L $(READ_LINE_LIB) -I $(READ_LINE_INC) -static-libsan -fsanitize=address
+	$(CC) $(CFLAGS) -o $(NAME) $^ $(READLINE) -L $(READ_LINE_LIB) -I $(READ_LINE_INC)
 
 %.o: %.c $(INC)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(READ_LINE_INC)

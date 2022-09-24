@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/23 11:40:07 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:42:48 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,6 @@ void	ft_built_export(char **cmd, t_env *env)
 	tmp = env;
 	if (!cmd[1])
 		sort_and_print(tmp);
-	else
-	{
-		while (cmd[++i])
-			if (ft_add_variable(cmd[i], tmp) == 0)
-				return ;
-	}
+	while (cmd[++i])
+		ft_add_variable(cmd[i], tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:41:02 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/03 14:09:11 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:39:50 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	ft_built_unset(char **str, t_env *data)
 	i = 0;
 	if (!str || !*str)
 		return ;
-	if (str[1])
-	{
-		while (str[++i])
-			ft_delete_element(str[i], tmp);
-	}
+	while (str[++i])
+		ft_delete_element(str[i], tmp);
+
 }

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 12:11:58 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:05:14 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 
 	if (!data->cmd || !data->cmd[0])
 		return ;
-	//signal(SIGQUIT, SIG_DFL);
 	tmp_cmd = data->cmd;
 	env_tab = ft_copy_env(env);
 	if (data->next)
@@ -107,20 +106,27 @@ void	ft_cmd_to_exec(t_execlst *el, t_env *env)
 	}
 }
 
+int	check_access(t_execlst *el)
+{
+	if (el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
+	{
+		if (access(el->cmd[0], F_OK) != 0)
+		{
+			printf("Minishell: %s: No such file or directory\n", el->cmd[0]);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	ft_executer_cmd(t_execlst *el, t_env *env)
 {
 	int			input;
 	int			status;
 
 	input = dup(0);
-	// //printf("value = %s", el->cmd[0]);
-
-	// if(el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
-	// {
-	// 	if(access(el->cmd[0], X_OK) != 0){
-	// 	printf("command not found\n");
-	// 	return ;}
-	// }
+	if (check_access(el))
+		return ;
 	if (el && !el->next && !ft_its_builtins(el, env))
 		return ;
 	ft_cmd_to_exec(el, env);

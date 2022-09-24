@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 01:58:41 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:38:24 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 		{
 			if (line[0])
 			{
-				add_history(line);
 				line = ft_strtrim(line, STR_SPC);
+				// int	i = 0;
+				// while (line[i] && line[i] == ' ')
+				// 	i++;
+				add_history(line);
 				tokens = tokenizer(line);
 				if (!check_syntax(tokens))
 				{
