@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/22 10:05:02 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 01:37:04 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "utils_char_str.h"
 # include "execution.h"
+
 
 /**
  * @brief 
@@ -136,5 +137,13 @@ void		ft_built_export(char **cmd, t_env *env);
 int			ft_lstsize(t_env *lst);
 //--------execution------------
 void		ft_executer_cmd(t_execlst *el, t_env *env);
+void		ft_cmd_to_exec(t_execlst *el, t_env *env);
+void		exec_other_cmd(t_execlst *data, t_env *env, int fd[]);
+char		*ft_get_path_of_cmd(char *word, t_env *env);
 t_env		*ft_creat_node(char *data);
+char		**ft_copy_env(t_env *env);
+char		*get_path(char *cmd, t_env *env);
+char		*ft_add_slache(char *cmd, char c);
+//--------signal---------------
+void	init_sig(void);
 #endif

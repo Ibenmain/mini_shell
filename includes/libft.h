@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/22 19:57:33 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:05:19 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define LIBFT_H
 # include<stdio.h>
-#include<stdbool.h>
+# include<stdbool.h>
 # include<stdlib.h>
 # include<string.h>
 # include<unistd.h>
@@ -26,6 +26,7 @@
 # include "execution.h"
 # include "libft.h"
 # include "parsing.h"
+# include <sys/stat.h>
 
 char	*getval(char *s, int start, int len);
 int		ft_strlen(char *str);

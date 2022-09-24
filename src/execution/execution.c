@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 21:29:26 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 01:32:38 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,23 @@
 #include "../../includes/execution.h"
 #include "../../includes/libft.h"
 
-char	*ft_add_slache(char *cmd, char c)
-{
-	char	*tmp;
-	int		len;
-
-	if (!cmd)
-	{
-		tmp = malloc(sizeof(char *) * 2);
-		tmp[0] = c;
-		tmp[1] = '\0';
-		return (tmp);
-	}
-	len = ft_strlen(cmd);
-	tmp = malloc(sizeof(char *) * len + 2);
-	ft_strlcpy(tmp, cmd, len + 1);
-	tmp[len] = c;
-	tmp[len + 1] = '\0';
-	return (tmp);
-}
-
-char	*get_path(char *cmd, t_env *env)
-{
-	char	*path;
-	char	**tab;
-	char	*retn;
-	int		i;
-
-	i = -1;
-	retn = NULL;
-	if (!cmd || !*cmd || !env)
-		return (NULL);
-	path = find_env("PATH", env);
-	tab = ft_split(path, ':');
-	while (tab[++i])
-	{
-		tab[i] = ft_add_slache(tab[i], '/');
-		tab[i] = concat(tab[i], cmd);
-		if (!retn)
-			retn = tab[i];
-	}
-	return (retn);
-}
-
-char	**ft_copy_env(t_env *env)
-{
-	char	**tab;
-	t_env	*tmp;
-	int		i;
-	int		len;
-
-	i = -1;
-	tmp = env;
-	len = ft_lstsize(env);
-	tab = (char **)malloc(sizeof(char *) * len + 1);
-	if (!tab)
-		return (NULL);
-	while (tmp)
-	{
-		tab[++i] = ft_strjoin(tmp->var, tmp->val);
-		tmp = tmp->next;
-	}
-	tab[++i] = NULL;
-	return (tab);
-}
+// struct stat		sfile;
+// if (stat(word, &sfile) == -1)
+// 	{
+// 		printf("Error Occurred\n");
+// 		exit(1);
+// 	}
+// 	if ((sfile.st_mode & S_IFDIR))
+// 	{
+// 		if (access(word, F_OK) == 0)
+// 			return (word);
+// 	}
 
 char	*ft_get_path_of_cmd(char *word, t_env *env)
 {
-	char	*path;
-	char	**tab;
-	int		i;
+	char			*path;
+	char			**tab;
+	int				i;
 
 	i = -1;
 	if (!word || !env)
@@ -115,6 +62,7 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 
 	if (!data->cmd || !data->cmd[0])
 		return ;
+	//signal(SIGQUIT, SIG_DFL);
 	tmp_cmd = data->cmd;
 	env_tab = ft_copy_env(env);
 	if (data->next)
@@ -126,12 +74,11 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 	if (!ft_its_builtins(data, env))
 		return ;
 	path = ft_get_path_of_cmd(tmp_cmd[0], env);
-	if (!tmp_cmd[0])
+	if (execve(path, tmp_cmd, env_tab) == -1)
 	{
 		printf("Minishell: %s: command not found\n", tmp_cmd[0]);
 		exit (1);
 	}
-	execve(path, tmp_cmd, env_tab);
 }
 
 void	ft_cmd_to_exec(t_execlst *el, t_env *env)
@@ -166,6 +113,14 @@ void	ft_executer_cmd(t_execlst *el, t_env *env)
 	int			status;
 
 	input = dup(0);
+	// //printf("value = %s", el->cmd[0]);
+
+	// if(el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
+	// {
+	// 	if(access(el->cmd[0], X_OK) != 0){
+	// 	printf("command not found\n");
+	// 	return ;}
+	// }
 	if (el && !el->next && !ft_its_builtins(el, env))
 		return ;
 	ft_cmd_to_exec(el, env);
