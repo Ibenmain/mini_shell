@@ -6,14 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/23 22:25:25 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 01:58:41 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 #include "../includes/execution.h"
 #include "../includes/libft.h"
-#include<string.h>
 
 void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
 {

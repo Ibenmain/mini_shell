@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 01:37:04 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:13:28 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "utils_char_str.h"
 # include "execution.h"
-
 
 /**
  * @brief 
@@ -120,7 +119,7 @@ void		ft_lstadd_back(t_env **alst, t_env *new);
 int			ft_its_builtins(t_execlst *data, t_env *env);
 //--------builtins------------
 char		*creat_tmp_file(char *file);
-void	ft_built_pwd(char *str, t_env *env);
+void		ft_built_pwd(char *str, t_env *env);
 void		ft_built_env(t_env *data);
 void		ft_built_cd(char **str, t_env *env);
 void		ft_built_echo(char **str);
@@ -145,5 +144,8 @@ char		**ft_copy_env(t_env *env);
 char		*get_path(char *cmd, t_env *env);
 char		*ft_add_slache(char *cmd, char c);
 //--------signal---------------
-void	init_sig(void);
+void		init_sig(void);
+//--------redirection---------------
+int			redirection(t_red *red);
+int			handle_red(t_red *red);
 #endif

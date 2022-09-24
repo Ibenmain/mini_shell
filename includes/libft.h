@@ -6,20 +6,20 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/23 23:05:19 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 01:59:13 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
-# include<stdio.h>
-# include<stdbool.h>
-# include<stdlib.h>
-# include<string.h>
-# include<unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 # include <signal.h>
-# include<fcntl.h>
+# include <fcntl.h>
 # include "utils_char_str.h"
 # include "readline/readline.h"
 # include "readline/history.h"

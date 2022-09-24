@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 14:08:05 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:20:54 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_execlst	*getred(t_execlst *e, t_tok *tok)
 			else
 				t->dlmtr = 1;
 		}
-		exec_hrdc(e->red);
+		//exec_hrdc(e->red);
 		t = t->next;
 	}
 	return (e);

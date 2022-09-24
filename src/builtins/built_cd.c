@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 09:46:05 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 02:01:11 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	modife_enirement(t_env *env, char *pwd)
 	}
 }
 
-void	modife_enirement_PWD(t_env *env)
+void	modife_enirement_pwd(t_env *env)
 {
 	char	buffer[1024];
 	char	*str;
@@ -101,5 +101,5 @@ void	ft_built_cd(char **str, t_env *env)
 	if (i < 0)
 		perror("cd");
 	modife_enirement(env, old_pwd);
-	modife_enirement_PWD(env);
+	modife_enirement_pwd(env);
 }

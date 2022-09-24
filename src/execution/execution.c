@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 01:32:38 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:11:58 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 		close(fd[1]);
 		close(fd[0]);
 	}
-	if (!ft_its_builtins(data, env))
+	if (!ft_its_builtins(data, env) || !redirection(data->red))
 		return ;
 	path = ft_get_path_of_cmd(tmp_cmd[0], env);
 	if (execve(path, tmp_cmd, env_tab) == -1)
