@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 16:00:49 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:59:55 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	desplay_shell(void)
 				if (el)
 				{
 					el = expand_list(el);
-					ft_executer_cmd(el, g_data.g_envlst);
+					ft_executer_cmd(el);
 					//print_redcmd(el);
 				}
 			}

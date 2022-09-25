@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 17:20:32 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/25 21:54:00 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ char	*ft_strdup(char *s1);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int	    ft_atoi(const char *str);
 void	ft_lstadd_back(t_env **alst, t_env *new);
-int	    ft_lstsize(t_env *lst);
 char	*join_add_eq(char *s1, char *s2);
 #endif

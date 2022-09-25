@@ -6,13 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 12:15:39 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:58:49 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-char	**ft_cmp_env(t_env *env)
+char	**ft_cmp_env()
 {
 	char	**tab;
 	t_env	*tmp;
@@ -20,8 +20,8 @@ char	**ft_cmp_env(t_env *env)
 	int		len;
 
 	i = -1;
-	tmp = env;
-	len = ft_lstsize(env);
+	tmp = g_data.g_envlst;
+	len = ft_lstsize();
 	tab = (char **)malloc(sizeof(char *) * len);
 	if (!tab)
 		return (NULL);
@@ -45,12 +45,12 @@ int	is_valide(char *cmd, int i)
 	return (0);
 }
 
-void	ft_add_to_env(char *var, char *val, t_env *env, bool plus)
+void	ft_add_to_env(char *var, char *val, bool plus)
 {
 	t_env	*new;
 	t_env	*tmp;
 
-	tmp = env;
+	tmp = g_data.g_envlst;
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return ;
@@ -71,10 +71,10 @@ void	ft_add_to_env(char *var, char *val, t_env *env, bool plus)
 	new->var = var;
 	new->val = val;
 	new->next = NULL;
-	ft_lstadd_back(&env, new);
+	ft_lstadd_back(&g_data.g_envlst, new);
 }
 
-int	ft_add_variable(char *cmd, t_env *env)
+int	ft_add_variable(char *cmd)
 {
 	char	*var;
 	char	*val;
@@ -93,22 +93,20 @@ int	ft_add_variable(char *cmd, t_env *env)
 		val = ft_substr(cmd, i + 2, ft_strlen(cmd) - i - 2);
 	else
 		val = ft_substr(cmd, i + 1, ft_strlen(cmd) - i - 1);
-	ft_add_to_env(var, val, env, (cmd[i] == '+'));
+	ft_add_to_env(var, val, (cmd[i] == '+'));
 	return (1);
 }
 
-void	ft_built_export(char **cmd, t_env *env)
+void	ft_built_export(char **cmd)
 {
-	t_env	*tmp;
 	int		i;
 
 	i = 1;
-	tmp = env;
 	if (!cmd[1])
-		sort_and_print(tmp);
+		sort_and_print();
 	while (cmd[i])
 	{
-		ft_add_variable(cmd[i], tmp);
+		ft_add_variable(cmd[i]);
 		i++;
 	}
 }

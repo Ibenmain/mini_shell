@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 00:11:20 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 18:34:49 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:13:23 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,13 @@ t_env	*init_env(char **env)
 	{
 		ft_lstadd_back(&head, ft_creat_node(join_add_eq("PWD", \
 			getcwd(s, 1024))));
-		ft_lstadd_back(&head, ft_creat_node(join_add_eq("SHLVL", "1")));
+		ft_lstadd_back(&head, ft_creat_node(join_add_eq("SHLVL", "0")));
 		return (head);
 	}
 	while (env[i])
 	{
-		ft_lstadd_back(&head, ft_creat_node(env[i]));
+		if (ft_strcmp(*ft_split(env[i], '='), "OLDPWD"))
+			ft_lstadd_back(&head, ft_creat_node(env[i]));
 		i++;
 	}
 	return (head);

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:40 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 12:28:56 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:54:41 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ t_execlst	*expand_list(t_execlst *el);
 char		*get_envval(char *s);
 char		*find_env(char *path);
 
-char		*ft_get_path_of_cmd(char *word, t_env *env);
-void		exec_other_cmd(t_execlst *data, t_env *env, int fd[]);
-void		ft_cmd_to_exec(t_execlst *el, t_env *env);
+char		*ft_get_path_of_cmd(char *word);
+void		exec_other_cmd(t_execlst *data, int fd[]);
+void		ft_cmd_to_exec(t_execlst *el);
 int			check_access(t_execlst *el);
-void		ft_executer_cmd(t_execlst *el, t_env *env);
+void		ft_executer_cmd(t_execlst *el);
 char		*ft_add_slache(char *cmd, char c);
-char		*get_path(char *cmd, t_env *env);
-char		**ft_copy_env(t_env *env);
+char		*get_path(char *cmd);
+char		**ft_copy_env(void);
 
 int			handle_red(t_red *red);
 int			redirection(t_red *red);

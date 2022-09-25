@@ -50,7 +50,7 @@ run:
 clean:
 	$(RM) $(OBJS)
 
-fclean:clean
+fclean : clean
 	$(RM) $(NAME)
 
-re:fclean all
+re : fclean all

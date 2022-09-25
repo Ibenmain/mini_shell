@@ -1,17 +1,9 @@
-echo "'$USER'"
-'ibenmain'"
------------------
-export l="sss"
-declare -x l=""sss"sss""
-----------------------------
-< Makefile
-[1]    51258 segmentation fault  ./minishell
----------------------------------------------
-<< Makefile
-[1]    51258 segmentation fault  ./minishell
----------------------------------------------
 ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls
 fork: Resource temporarily unavailable
 ------------------------------------------------------------------------------------------
 echo ~/ls
 ~ --> /Users/ibenmain/ls
+
+redirect without  command (> $USER) error
+
+echo -n -n ~ sl //error

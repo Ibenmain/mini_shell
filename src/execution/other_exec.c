@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:33:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 20:22:50 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:53:05 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_add_slache(char *cmd, char c)
 	return (tmp);
 }
 
-char	*get_path(char *cmd, t_env *env)
+char	*get_path(char *cmd)
 {
 	char	*path;
 	char	**tab;
@@ -41,7 +41,7 @@ char	*get_path(char *cmd, t_env *env)
 
 	i = -1;
 	retn = NULL;
-	if (!cmd || !*cmd || !env)
+	if (!cmd || !*cmd || !g_data.g_envlst)
 		return (NULL);
 	path = find_env("PATH");
 	tab = ft_split(path, ':');
@@ -60,7 +60,7 @@ char	*get_path(char *cmd, t_env *env)
 	return (retn);
 }
 
-char	**ft_copy_env(t_env *env)
+char	**ft_copy_env(void)
 {
 	char	**tab;
 	t_env	*tmp;
@@ -68,8 +68,8 @@ char	**ft_copy_env(t_env *env)
 	int		len;
 
 	i = -1;
-	tmp = env;
-	len = ft_lstsize(env);
+	tmp = g_data.g_envlst;
+	len = ft_lstsize();
 	tab = (char **)malloc(sizeof(char *) * len + 1);
 	if (!tab)
 		return (NULL);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   other_built_export.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:06:48 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 17:28:23 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/25 21:44:46 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-int check_egale(char *str)
+int	check_egale(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -25,11 +25,11 @@ int check_egale(char *str)
 	return (0);
 }
 
-void ft_print_tab(t_env *env)
+void	ft_print_tab(void)
 {
-	t_env *data;
+	t_env	*data;
 
-	data = env;
+	data = g_data.g_envlst;
 	while (data)
 	{
 		printf("declare -x %s", data->var);
@@ -49,14 +49,14 @@ void	ft_swap(char **str1, char **str2)
 	*str2 = tmp;
 }
 
-void	sort_and_print(t_env *env)
+void	sort_and_print(void)
 {
 	t_env	*tmp;
 	t_env	*next;
 
-	if (!env)
+	if (!g_data.g_envlst)
 		return ;
-	tmp = env;
+	tmp = g_data.g_envlst;
 	while (tmp && tmp->next)
 	{
 		next = tmp->next;
@@ -71,5 +71,5 @@ void	sort_and_print(t_env *env)
 		}
 		tmp = tmp->next;
 	}
-	ft_print_tab(env);
+	ft_print_tab();
 }

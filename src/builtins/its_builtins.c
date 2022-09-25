@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   its_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 17:26:56 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/25 21:45:02 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_not_builtin(char *cmd)
 	return (0);
 }
 
-int	ft_its_builtins(t_execlst *data, t_env *env)
+int	ft_its_builtins(t_execlst *data)
 {
 	int	fd[2];
 
@@ -33,17 +33,17 @@ int	ft_its_builtins(t_execlst *data, t_env *env)
 	if (redirection(data->red) == 0)
 		;
 	if (!ft_strcmp(data->cmd[0], "pwd"))
-		ft_built_pwd(data->cmd[0], env);
+		ft_built_pwd(data->cmd[0]);
 	else if (!ft_strcmp(data->cmd[0], "env"))
-		ft_built_env(env);
+		ft_built_env();
 	else if (!ft_strcmp(data->cmd[0], "cd"))
-		ft_built_cd(data->cmd, env);
+		ft_built_cd(data->cmd);
 	else if (!ft_strcmp(data->cmd[0], "echo"))
 		ft_built_echo(data->cmd);
 	else if (!ft_strcmp(data->cmd[0], "export"))
-		ft_built_export(data->cmd, env);
+		ft_built_export(data->cmd);
 	else if (!ft_strcmp(data->cmd[0], "unset"))
-		ft_built_unset(data->cmd, env);
+		ft_built_unset(data->cmd);
 	else if (!ft_strcmp(data->cmd[0], "exit"))
 		ft_built_exit(data->cmd);
 	return (dup2(fd[0], 0), dup2(fd[1], 1), close(fd[0]), close(fd[1]), 0);

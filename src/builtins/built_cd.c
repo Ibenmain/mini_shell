@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 17:46:56 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/25 22:10:31 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,45 @@ int	ft_get_path(char *cmd)
 	return (i);
 }
 
-void	modife_enirement(t_env *env, char *pwd)
+void	modife_enirement(char *old_pwd)
 {
-	while (env)
+	int		find;
+	t_env	*tmp;
+
+	find = 0;
+	tmp = g_data.g_envlst;
+	while (tmp)
 	{
-		if (!ft_strcmp(env->var, "OLDPWD"))
-			env->val = pwd;
-		env = env->next;
+		if (!ft_strcmp((tmp)->var, "OLDPWD"))
+		{
+			(tmp)->val = old_pwd;
+			find = 1;
+		}
+		tmp = (tmp)->next;
 	}
+	if (!find)
+		ft_lstadd_back(&g_data.g_envlst, \
+			ft_creat_node(join_add_eq("OLDPWD", old_pwd)));
 }
 
-void	modife_enirement_pwd(t_env *env)
+void	modife_enirement_pwd(void)
 {
 	char	buffer[1024];
 	char	*str;
+	t_env	*tmp;
 
 	getcwd(buffer, 1024);
 	str = ft_strdup(buffer);
-	while (env)
+	tmp = g_data.g_envlst;
+	while (tmp)
 	{
-		if (!ft_strcmp(env->var, "PWD"))
-			env->val = str;
-		env = env->next;
+		if (!ft_strcmp(tmp->var, "PWD"))
+			tmp->val = str;
+		tmp = tmp->next;
 	}
 }
 
-void	ft_add_oldpwd(t_env **env, char *old_pwd)
-{
-	ft_lstadd_back(env, ft_creat_node(join_add_eq("OLDPWD", old_pwd)));
-}
-
-void	ft_built_cd(char **str, t_env *env)
+void	ft_built_cd(char **str)
 {
 	int		i;
 	char	*path;
@@ -92,12 +100,13 @@ void	ft_built_cd(char **str, t_env *env)
 			ft_print_error("HOME");
 		i = chdir(path);
 	}
+	else if (!ft_strcmp(str[1] , "."))
+		return ;
 	else
 		i = ft_get_path(str[1]);
-	if (i == 1)
-		ft_add_oldpwd(&env, old_pwd);
 	if (i < 0)
 		perror("cd");
-	modife_enirement(env, old_pwd);
-	modife_enirement_pwd(env);
+	if (i != 1)
+		modife_enirement(old_pwd);
+	modife_enirement_pwd();
 }

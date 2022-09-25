@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 22:54:39 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 19:17:48 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:50:43 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	ft_lstadd_back(t_env **alst, t_env *new)
 	}
 }
 
-int	ft_lstsize(t_env *lst)
+int	ft_lstsize()
 {
 	t_env	*tmp;
 	int		size;
 
 	size = 0;
-	tmp = lst;
+	tmp = g_data.g_envlst;
 	if (!tmp)
 		return (0);
 	else

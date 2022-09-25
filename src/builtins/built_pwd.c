@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:52:12 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 17:28:13 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/25 21:40:12 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-char	*ft_get_pwd(t_env *env)
+char	*ft_get_pwd(void)
 {
+	t_env	*env;
+
+	env = g_data.g_envlst;
 	while (env)
 	{
 		if (!ft_strcmp(env->var, "PWD"))
@@ -23,7 +26,7 @@ char	*ft_get_pwd(t_env *env)
 	return (NULL);
 }
 
-void	ft_built_pwd(char *str, t_env *env)
+void	ft_built_pwd(char *str)
 {
 	char	s[1024];
 
@@ -31,8 +34,8 @@ void	ft_built_pwd(char *str, t_env *env)
 	{
 		if (getcwd(s, 1024))
 			ft_putendl_fd(s, 1);
-		else if (ft_get_pwd(env))
-			ft_putendl_fd(ft_get_pwd(env), 1);
+		else if (ft_get_pwd())
+			ft_putendl_fd(ft_get_pwd(), 1);
 		else
 			ft_putendl_fd(getenv("PWD"), 1);
 	}

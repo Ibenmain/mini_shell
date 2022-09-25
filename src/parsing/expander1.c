@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:37:01 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 15:43:54 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:18:56 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*getsqts_val(char *s)
 	s_qts[i] = CHR_END;
 	while (--i >= 0 && s[i] != CHR_S_QT)
 		s_qts[i] = s[i];
-	return (s_qts);	
+	return (s_qts);
 }
 
 char	*get_envval(char *s)
@@ -60,7 +60,7 @@ int	check_qts(char *s, int i, int flg)
 		(s[i] == CHR_S_QT && s[0] == CHR_D_QT)) && s[i] != CHR_DLR);
 }
 
-void skip(char c, int *i)
+void	skip(char c, int *i)
 {
 	if (*i == 0 && c == CHR_D_QT)
 		*i += 1;
