@@ -5,14 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 10:55:41 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/21 11:57:50 by ibenmain         ###   ########.fr       */
+/*   Created: 2022/09/24 16:55:58 by kfaouzi           #+#    #+#             */
+/*   Updated: 2022/09/24 18:36:38 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	size_t	str_len;
+	size_t	i;
+	char	*new;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	str_len = ft_strlen(s);
+	if (start >= str_len)
+		new = malloc(1);
+	else
+	{
+		if (len > str_len)
+			len = str_len;
+		new = (char *)malloc((len + 1) * sizeof(char));
+		if (!new)
+			return (NULL);
+		while (i < len)
+			new[i++] = s[start++];
+	}
+	new[i] = '\0';
+	return (new);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+		write(fd, &s[i++], 1);
+	write(fd, "\n", 1);
+}
 
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
@@ -33,70 +74,20 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (i);
 }
 
-static int	ft_count(char *str, char d)
+char	*ft_strdup(char *s1)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	if (str[0] != d)
-		count = 1;
-	else
-		count = 0;
-	while (str[i])
-	{
-		if (str[i] && str[i] == d && str[i + 1] != d && str[i + 1] != '\0')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static void	_free(char **tab)
-{
-	while (*tab)
-		free(*tab);
-	free(tab);
-}
-
-static char	**ft_other_split(char *s, char c, int i, int j)
-{
-	char	**tab;
-	int		start;
-	int		end;
-
-	if (!s)
-		return (NULL);
-	tab = (char **)malloc((ft_count(s, c) + 1) * sizeof(char *));
-	if (!tab)
-		return (NULL);
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		end = i;
-		if (end > 0 && s[end -1] != c)
-		{
-			tab[j++] = ft_substr(s, start, end - start);
-			if (!tab[j - 1])
-				return (_free(tab), NULL);
-		}
-	}
-	return (tab[j] = NULL, tab);
-}
-
-char	**ft_split(char *s, char c)
-{
-	char	**tab;
+	char	*new;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	tab = ft_other_split(s, c, i, j);
-	return (tab);
+	new = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		new[i] = s1[i];
+		i++;
+	}	
+	new[i] = '\0';
+	return (new);
 }

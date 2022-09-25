@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:52:12 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/22 19:18:56 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:28:13 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 char	*ft_get_pwd(t_env *env)
 {

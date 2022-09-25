@@ -6,13 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:06:22 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 14:07:47 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:51:44 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int	ft_nbrlen(long int n)
 {
@@ -69,49 +67,12 @@ char	*ft_itoa(int n)
 	return (itoa);
 }
 
-void	ft_lstadd_back(t_env **alst, t_env *new)
+int	ft_isdigit(int c)
 {
-	t_env	*ptr;
-
-	if (alst)
-	{
-		if (*alst == NULL)
-		{
-			*alst = new;
-			new = NULL;
-		}
-		else
-		{
-			ptr = *alst;
-			while (ptr->next != NULL)
-				ptr = ptr->next;
-			ptr->next = new;
-		}
-	}
+	return (c >= '0' && c <= '9');
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+int	ft_isalpha(int c)
 {
-	size_t	str_len;
-	size_t	i;
-	char	*new;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	str_len = ft_strlen(s);
-	if (start >= str_len)
-		new = malloc(1);
-	else
-	{
-		if (len > str_len)
-			len = str_len;
-		new = (char *)malloc((len + 1) * sizeof(char));
-		if (!new)
-			return (NULL);
-		while (i < len)
-			new[i++] = s[start++];
-	}
-	new[i] = '\0';
-	return (new);
+	return ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A'));
 }

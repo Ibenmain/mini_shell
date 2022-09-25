@@ -6,13 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 16:05:14 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:06:09 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 // struct stat		sfile;
 // if (stat(word, &sfile) == -1)
@@ -26,6 +24,23 @@
 // 			return (word);
 // 	}
 
+char	*ft_spare_path(char *word)
+{
+	char	**tab;
+	int		i;
+
+	i = -1;
+	tab = ft_split(PATH, ':');
+	while (tab[++i])
+	{
+		tab[i] = ft_add_slache(tab[i], '/');
+		tab[i] = concat(tab[i], word);
+		if (access(tab[i], F_OK) == 0)
+			return (tab[i]);
+	}
+	return (NULL);
+}
+
 char	*ft_get_path_of_cmd(char *word, t_env *env)
 {
 	char			*path;
@@ -35,20 +50,17 @@ char	*ft_get_path_of_cmd(char *word, t_env *env)
 	i = -1;
 	if (!word || !env)
 		return (NULL);
-	if (access(word, F_OK) == 0)
+	if (access(word, X_OK) == 0)
 		return (word);
-	path = find_env("PATH", env);
+	path = find_env("PATH");
 	if (!path)
-	{
-		printf("Minishell: %s: command not found\n", word);
-		exit (1);
-	}
+		return (NULL);
 	tab = ft_split(path, ':');
 	while (tab[++i])
 	{
 		tab[i] = ft_add_slache(tab[i], '/');
 		tab[i] = concat(tab[i], word);
-		if (access(tab[i], F_OK) == 0)
+		if (access(tab[i], X_OK) == 0)
 			return (tab[i]);
 	}
 	return (NULL);
@@ -73,6 +85,8 @@ void	exec_other_cmd(t_execlst *data, t_env *env, int fd[])
 	if (!ft_its_builtins(data, env) || !redirection(data->red))
 		return ;
 	path = ft_get_path_of_cmd(tmp_cmd[0], env);
+	if (!path)
+		path = ft_spare_path(tmp_cmd[0]);
 	if (execve(path, tmp_cmd, env_tab) == -1)
 	{
 		printf("Minishell: %s: command not found\n", tmp_cmd[0]);
@@ -108,11 +122,11 @@ void	ft_cmd_to_exec(t_execlst *el, t_env *env)
 
 int	check_access(t_execlst *el)
 {
-	if (el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
+	if (el->cmd && el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
 	{
-		if (access(el->cmd[0], F_OK) != 0)
+		if (access(el->cmd[0], X_OK) != 0)
 		{
-			printf("Minishell: %s: No such file or directory\n", el->cmd[0]);
+			printf("Minishell: %s: Permission denied\n", el->cmd[0]);
 			return (1);
 		}
 	}

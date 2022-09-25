@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   other_built_export.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:06:48 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/23 15:04:30 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:28:23 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int check_egale(char *str)
 {

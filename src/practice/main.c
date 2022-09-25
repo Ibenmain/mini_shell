@@ -1,21 +1,19 @@
-extern int errno;
-#include<unistd.h>
-#include<errno.h>
-#include<stdio.h>
-#include<fcntl.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
 
+int a = 0;
 
-
-int main(int argc, char *const *argv){
-    char    **arr;
-
-    arr = malloc(sizeof(char *) * 4);
-
-    arr[0] = malloc(sizeof(char) * 60);
-    arr[1] = malloc(sizeof(char) * 60);
-    arr[2] = malloc(sizeof(char) * 60);
-    arr[3] = NULL;
-
-    free_arr2d(arr);
+int main()
+{
+    signal(SIGINT, handle_sigint);
+    while (1)
+    {
+        print();
+        printf("hello\n");
+        sleep(1);
+    }
+    return 0;
 }

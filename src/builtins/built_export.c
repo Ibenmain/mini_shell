@@ -6,13 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 14:42:48 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:15:39 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 char	**ft_cmp_env(t_env *env)
 {
@@ -30,9 +28,9 @@ char	**ft_cmp_env(t_env *env)
 	while (tmp)
 	{
 		if (tmp->val == NULL)
-			tab[++i] = ft_strjoin(tmp->var, "");
+			tab[++i] = join_add_eq(tmp->var, "");
 		else
-			tab[++i] = ft_strjoin(tmp->var, tmp->val);
+			tab[++i] = join_add_eq(tmp->var, tmp->val);
 		tmp = tmp->next;
 	}
 	tab[++i] = NULL;
@@ -104,10 +102,13 @@ void	ft_built_export(char **cmd, t_env *env)
 	t_env	*tmp;
 	int		i;
 
-	i = 0;
+	i = 1;
 	tmp = env;
 	if (!cmd[1])
 		sort_and_print(tmp);
-	while (cmd[++i])
+	while (cmd[i])
+	{
 		ft_add_variable(cmd[i], tmp);
+		i++;
+	}
 }

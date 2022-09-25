@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   its_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 12:28:30 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:26:56 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int	ft_not_builtin(char *cmd)
 {

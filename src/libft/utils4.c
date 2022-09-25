@@ -5,49 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 17:06:04 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/21 11:28:18 by ibenmain         ###   ########.fr       */
+/*   Created: 2022/08/30 22:54:39 by kfaouzi           #+#    #+#             */
+/*   Updated: 2022/09/24 19:17:48 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_isalnum(int c)
 {
-	write(fd, &c, 1);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	add_grb(void **content)
 {
-	int	i;
+	t_grb_clltr	*tmp;
 
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i] != '\0')
-		write(fd, &s[i++], 1);
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-		write(fd, &s[i++], 1);
-	write(fd, "\n", 1);
-}
-
-int	ft_isalpha(int c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
+	if (!g_data.g_grb)
+	{
+		g_data.g_grb = malloc(sizeof(t_grb_clltr));
+		g_data.g_grb->value = *content;
+		g_data.g_grb->next = NULL;
+	}
 	else
-		return (0);
+	{
+		tmp = g_data.g_grb;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = malloc(sizeof(t_grb_clltr));
+		tmp->next->value = content;
+		tmp->next->next = NULL;
+	}
+}
+
+void	ft_lstadd_back(t_env **alst, t_env *new)
+{
+	t_env	*ptr;
+
+	if (!new)
+		return ;
+	if (alst)
+	{
+		if (*alst == NULL)
+		{
+			*alst = new;
+			new = NULL;
+		}
+		else
+		{
+			ptr = *alst;
+			while (ptr->next != NULL)
+				ptr = ptr->next;
+			ptr->next = new;
+		}
+	}
 }
 
 int	ft_lstsize(t_env *lst)
@@ -70,32 +81,7 @@ int	ft_lstsize(t_env *lst)
 	return (size);
 }
 
-int	ft_atoi(const char *str)
-{
-	int			i;
-	int			signe;
-	long int	nb;
-
-	i = 0;
-	signe = 0;
-	nb = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
-		signe = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while ((str[i] != '\0') && (str[i] >= '0') && (str[i] <= '9'))
-	{
-		nb = nb * 10 + str[i] - '0';
-		i++;
-	}
-	if (signe == -1)
-		return (signe * nb);
-	return (nb);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
+char	*join_add_eq(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -109,7 +95,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	size_s1 = ft_strlen(s1);
 	size_s2 = ft_strlen(s2) + 1;
-	new = (char *)malloc((size_s1 + size_s2) + 1 * sizeof(char));
+	new = (char *)malloc((size_s1 + size_s2) + 2 * sizeof(char));
 	if (!new)
 		return (NULL);
 	while (++i < size_s1)

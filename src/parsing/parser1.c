@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:59:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 14:08:33 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:06:38 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int	exist_pipe(t_tok *token)
 {
@@ -42,7 +40,7 @@ int	check_syntax(t_tok *token)
 		|| token->type == S_QTE))
 	{
 		if (check_str(token->value))
-			return (printf(STR_QTERR), v);
+			return (printf(STR_QTERR), 1);
 		token = token->next;
 	}
 	if (!v && (token && token->type == RED))

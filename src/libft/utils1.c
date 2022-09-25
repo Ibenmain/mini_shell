@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:15:29 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:38:26 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:06:08 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int	ft_strlen(char *str)
 {
@@ -86,7 +84,7 @@ char	*ft_strdup_trim(char *s1, char *set)
 		return (trim);
 	}
 	trim[k] = CHR_END;
-	return (trim);
+	return ( trim);
 }
 
 char	*ft_strtrim(char *s1, char *set)
@@ -98,5 +96,5 @@ char	*ft_strtrim(char *s1, char *set)
 	if (!set)
 		return ((char *)s1);
 	trim = ft_strdup_trim(s1, set);
-	return (free(s1), trim);
+	return (trim);
 }

@@ -6,25 +6,25 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 11:54:52 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 12:12:08 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:17:47 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 int	handle_red(t_red *red)
 {
 	int	fd;
 
-	if (red->type == REDIN)
+	if (red->type == REDIN || red->type == HEREDC)
 	{
 		fd = open(red->file, O_RDONLY);
 		if (fd < 0)
 			return (0);
 		dup2(fd, 0);
 		close(fd);
+		// if (red->type == HEREDC)
+		 	//unlink(red->file);
 	}
 	else
 	{

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:00:51 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:56:10 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:06:28 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 t_execlst	*get_execlst(t_tok *tkns)
 {
@@ -98,4 +96,28 @@ int	add_tknex(t_execlst **token, t_execlst **new)
 		}
 	}
 	return (0);
+}
+
+t_execlst	*getred(t_execlst *e, t_tok *tok)
+{
+	t_red	*t;
+
+	if (!e)
+		e = init_execlst();
+	if (!e)
+		return (NULL);
+	e->red = getredlst(e->red, tok);
+	t = e->red;
+	while (t)
+	{
+		if (t->type == HEREDC)
+		{
+			if (ft_strchr(t->file, CHR_D_QT) || ft_strchr(t->file, CHR_S_QT))
+				t->dlmtr = 0;
+			else
+				t->dlmtr = 1;
+		}
+		t = t->next;
+	}
+	return (e);
 }

@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 19:45:32 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/03 00:12:21 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:31:49 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
-char	*find_env(char *path, t_env *data)
+char	*find_env(char *path)
 {
 	t_env	*env;
 
-	env = data;
+	env = g_data.g_envlst;
 	if (path)
 	{
 		while (env)

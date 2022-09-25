@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 03:48:42 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/03 16:44:17 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:06:12 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 char	*getval(char *s, int start, int len)
 {
-	size_t	s_len;
+	int		s_len;
 	char	*sub_tkn;
+	int		sz;
 
 	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
+		s = "";
+	sz = ft_strlen(s);
+	if (start >= sz)
 		s_len = 1;
-	else if (len > ft_strlen(s))
-		s_len = ft_strlen(s) + 1;
+	else if (len > sz)
+		s_len = sz;
 	else
 		s_len = len + 1;
-	sub_tkn = (char *)malloc(s_len);
+	sub_tkn = malloc(s_len);
 	if (!(sub_tkn))
 		return (NULL);
 	sub_tkn[--s_len] = CHR_END;
-	while (s_len-- > 0)
+	while (--s_len >= 0)
 		sub_tkn[s_len] = s[s_len + start];
 	return (sub_tkn);
 }
@@ -73,7 +73,7 @@ char	*concat(char *s1, char *s2)
 		i++;
 	while (s2[j])
 		j++;
-	new = malloc(i + j);
+	new = malloc(i + j + 1);
 	if (!new)
 		return (NULL);
 	new[i + j] = CHR_END;
@@ -82,4 +82,16 @@ char	*concat(char *s1, char *s2)
 	while (--i >= 0)
 		new[i] = s1[i];
 	return (new);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+	{
+		while (*s)
+		{
+			write(fd, s, 1);
+			s++;
+		}
+	}
 }

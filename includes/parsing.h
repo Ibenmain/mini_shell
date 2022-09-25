@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 12:13:28 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:52:19 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 
 # define PARSING_H
-# include "libft.h"
-# include "utils_char_str.h"
-# include "execution.h"
 
 /**
  * @brief 
@@ -78,11 +75,34 @@ typedef struct s_execlst
 	struct s_execlst	*next;
 }t_execlst;
 
-typedef struct s_env{
+/**
+ * @brief list for environment variables
+ * with their sizes
+ */
+typedef struct s_env
+{
 	char			*var;
 	char			*val;
+	int				sz_var;
+	int				sz_val;
 	struct s_env	*next;
-}	t_env;
+}t_env;
+
+typedef struct s_grb_collector
+{
+	void					*value;
+	struct s_grb_collector	*next;
+}t_grb_clltr;
+
+typedef struct s_data
+{
+	t_env			*g_envlst;
+	t_grb_clltr		*g_grb;
+	int				exit_status;
+	struct s_data	*next;
+}t_data;
+
+t_data	g_data;
 
 //free memory
 void		ft_lstclear(t_tok **lst);
@@ -106,46 +126,10 @@ int			help_pipe(t_tok **token);
 int			add_tknex(t_execlst **token, t_execlst **new);
 t_execlst	*get_execlst(t_tok *tkns);
 t_execlst	*getred(t_execlst *e, t_tok *tok);
-//char		*exec_hrdc(t_red *red);
+// char		*exec_hrdc(t_red *red);
 t_red		*getredlst(t_red *red, t_tok *tok);
 t_enum		get_redtype(char *val);
 t_execlst	*getcmd(t_execlst *e, char *val);
 t_execlst	*init_execlst(void);
-//---------------------------
-void		desplay_shell(t_tok *tokens, t_execlst *el, char **data);
-char		*exec_hrdc(t_red *red);
-t_env		*init_env(char **env);
-void		ft_lstadd_back(t_env **alst, t_env *new);
-int			ft_its_builtins(t_execlst *data, t_env *env);
-//--------builtins------------
-char		*creat_tmp_file(char *file);
-void		ft_built_pwd(char *str, t_env *env);
-void		ft_built_env(t_env *data);
-void		ft_built_cd(char **str, t_env *env);
-void		ft_built_echo(char **str);
-char		*find_env(char *path, t_env *data);
-int			ft_check_newline(char *str);
-void		ft_built_exit(char **str);
-int			ft_add_variable(char *cmd, t_env *env);
-int			is_valide(char *cmd, int i);
-void		sort_and_print(t_env *env);
-void		ft_print_tab(t_env *env);
-void		ft_add_to_env(char *var, char *val, t_env *env, bool plus);
-void		ft_built_unset(char **str, t_env *data);
-void		ft_built_export(char **cmd, t_env *env);
-int			ft_lstsize(t_env *lst);
-//--------execution------------
-void		ft_executer_cmd(t_execlst *el, t_env *env);
-void		ft_cmd_to_exec(t_execlst *el, t_env *env);
-void		exec_other_cmd(t_execlst *data, t_env *env, int fd[]);
-char		*ft_get_path_of_cmd(char *word, t_env *env);
-t_env		*ft_creat_node(char *data);
-char		**ft_copy_env(t_env *env);
-char		*get_path(char *cmd, t_env *env);
-char		*ft_add_slache(char *cmd, char c);
-//--------signal---------------
-void		init_sig(void);
-//--------redirection---------------
-int			redirection(t_red *red);
-int			handle_red(t_red *red);
+
 #endif

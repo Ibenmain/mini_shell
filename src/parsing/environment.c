@@ -6,11 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 00:11:20 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 18:34:49 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:55:49 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/utils_char_str.h"
+#include "../../includes/parsing.h"
+#include "../../includes/execution.h"
+#include "../../includes/libft.h"
 
 int	ft_index_key(char *data)
 {
@@ -32,7 +34,7 @@ char	*ft_key(char *data)
 
 	len = 0;
 	len = ft_index_key(data);
-	str = getval(data, 0, len);
+	str = ft_substr(data, 0, len);
 	if (!str)
 		return (NULL);
 	return (str);

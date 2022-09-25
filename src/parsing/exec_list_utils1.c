@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 12:20:54 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:37:27 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 t_execlst	*init_execlst(void)
 {
@@ -24,7 +22,7 @@ t_execlst	*init_execlst(void)
 	e->cmd = NULL;
 	e->red = NULL;
 	e->next = NULL;
-	return (e);
+	return ( e);
 }
 
 t_execlst	*getcmd(t_execlst *e, char *val)
@@ -40,14 +38,15 @@ t_execlst	*getcmd(t_execlst *e, char *val)
 	while (e->cmd && e->cmd[i])
 		i++;
 	new = malloc(sizeof(char *) * (i + 2));
+	if (!new)
+		return (NULL);
 	new[i + 1] = NULL;
-	new[i] = val;
+	new[i] = val;//expander(NULL, val, 0);
+	if (!new[i])
+		return (NULL);
 	while (--i >= 0 && e->cmd[i])
-	{
-		new[i] = e->cmd[i]/*expender(e->cmd[i])*/;//TODO add expender
-		e->cmd[i] = NULL;
-	}
-	return (free(e->cmd), e->cmd = new, e);
+		new[i] = e->cmd[i];//expander(NULL, e->cmd[i], 0);
+	return (e->cmd = new, e);
 }
 
 t_enum	get_redtype(char *val)
@@ -63,55 +62,37 @@ t_enum	get_redtype(char *val)
 	return (NON);
 }
 
+t_red	*new_red(t_tok *tok)
+{
+	t_red *head;
+
+	head = malloc(sizeof(t_red));
+	if (!head)
+		return (NULL);
+	head->type = get_redtype(tok->value);
+	head->file = tok->next->value;
+	head->next = NULL;
+	return (head);
+}
+
 t_red	*getredlst(t_red *red, t_tok *tok)
 {
 	t_red	*t;
 
 	if (!red)
 	{
-		red = malloc(sizeof(t_red));
+		red = new_red(tok);
 		if (!red)
 			return (NULL);
-		red->type = get_redtype(tok->value);
-		red->file = tok->next->value;
-		red->next = NULL;
 	}
 	else
 	{
 		t = red;
 		while (t->next)
 			t = t->next;
-		t->next = malloc(sizeof(t_red));
+		t->next = new_red(tok);
 		if (!t->next)
 			return (NULL);
-		t->next->type = get_redtype(tok->value);
-		t->next->file = tok->next->value;
-		t->next->next = NULL;
 	}
 	return (red);
-}
-
-t_execlst	*getred(t_execlst *e, t_tok *tok)
-{
-	t_red	*t;
-
-	if (!e)
-		e = init_execlst();
-	if (!e)
-		return (NULL);
-	e->red = getredlst(e->red, tok);
-	t = e->red;
-	while (t)
-	{
-		if (t->type == HEREDC)
-		{
-			if (ft_strchr(t->file, CHR_D_QT) || ft_strchr(t->file, CHR_S_QT))
-				t->dlmtr = 0;
-			else
-				t->dlmtr = 1;
-		}
-		//exec_hrdc(e->red);
-		t = t->next;
-	}
-	return (e);
 }

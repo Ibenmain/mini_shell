@@ -6,13 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:33:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 01:34:17 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:22:50 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 char	*ft_add_slache(char *cmd, char c)
 {
@@ -45,14 +43,19 @@ char	*get_path(char *cmd, t_env *env)
 	retn = NULL;
 	if (!cmd || !*cmd || !env)
 		return (NULL);
-	path = find_env("PATH", env);
+	path = find_env("PATH");
 	tab = ft_split(path, ':');
 	while (tab[++i])
 	{
-		tab[i] = ft_add_slache(tab[i], '/');
-		tab[i] = concat(tab[i], cmd);
-		if (!retn)
-			retn = tab[i];
+		if (tab[i])
+		{
+			tab[i] = ft_add_slache(tab[i], '/');
+			tab[i] = concat(tab[i], cmd);
+			if (!retn)
+				retn = tab[i];
+		}
+		else
+			return (NULL);
 	}
 	return (retn);
 }
@@ -72,7 +75,9 @@ char	**ft_copy_env(t_env *env)
 		return (NULL);
 	while (tmp)
 	{
-		tab[++i] = ft_strjoin(tmp->var, tmp->val);
+		tab[++i] = join_add_eq(tmp->var, tmp->val);
+		if (tab[i] == NULL)
+			return (NULL);
 		tmp = tmp->next;
 	}
 	tab[++i] = NULL;

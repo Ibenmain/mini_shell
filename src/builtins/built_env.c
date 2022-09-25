@@ -6,13 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 15:20:59 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/19 18:45:51 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:18:52 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing.h"
-#include "../../includes/execution.h"
-#include "../../includes/libft.h"
+#include "../../includes/utils_char_str.h"
 
 void	ft_built_env(t_env *data)
 {

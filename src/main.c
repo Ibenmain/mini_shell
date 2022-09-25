@@ -6,53 +6,104 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 14:38:24 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:00:49 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
-#include "../includes/execution.h"
-#include "../includes/libft.h"
+#include "../includes/utils_char_str.h"
+#include <string.h>
 
-void	desplay_shell(t_tok *tokens, t_execlst *el, char **data)
+void	print_env(t_env *e);
+void	print_redcmd(t_execlst	*e);
+
+void	handel_signal(int sig)
 {
-	char	*line;
-	t_env	*env;
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		//rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
 
-	env = init_env(data);
+void	desplay_shell(void)
+{
+	char		*line;
+	t_tok		*tokens;
+	t_execlst	*el;
+
+	signal(SIGINT, handel_signal);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		//init_sig();
 		line = readline(STR_PROMPT);
-		if (line)
+		if (!line)
 		{
-			if (line[0])
+			write (1, "exit\n", 5);
+			exit(0);
+		}
+		if (line[0])
+		{
+			add_history(line);
+			line = ft_strtrim(line, STR_SPC);
+			tokens = tokenizer(line);
+			if (!check_syntax(tokens))
 			{
-				line = ft_strtrim(line, STR_SPC);
-				// int	i = 0;
-				// while (line[i] && line[i] == ' ')
-				// 	i++;
-				add_history(line);
-				tokens = tokenizer(line);
-				if (!check_syntax(tokens))
+				el = get_execlst(tokens);
+				if (el)
 				{
-					el = get_execlst(tokens);
-					ft_executer_cmd(el, env);
-					clear_execlst(&el);
+					el = expand_list(el);
+					ft_executer_cmd(el, g_data.g_envlst);
+					//print_redcmd(el);
 				}
-				ft_lstclear(&tokens);
 			}
-			free(line);
 		}
 	}
 }
 
-int	main(int argc, char **argv, char **data)
+int	main(int argc, char **av, char **env_)
 {
-	t_tok		tokens;
-	t_execlst	el;
+	argc = 0;
+	av = NULL;
 
-	(void)argc;
-	(void)argv;
-	desplay_shell(&tokens, &el, data);
+	g_data.g_envlst = init_env(env_);
+	//print_env(g_data.g_envlst);
+	desplay_shell();
+}
+
+void	print_env(t_env *e)
+{
+	t_env	*tmp = e;
+
+	printf("****************************env*********************************\n");
+	while (tmp)
+	{
+		printf("%s(%d)=%s(%d)\n", tmp->var, tmp->sz_var, tmp->val, tmp->sz_val);
+		tmp = tmp->next;
+	}
+	printf("****************************env*********************************\n\n\n");
+}
+
+void	print_redcmd(t_execlst	*e)
+{
+	t_execlst	*el = e;
+
+	printf("****************************cmdred*********************************\n");
+	while (el)
+	{
+		int i = -1;
+		printf("cmd : ");
+		while (el->cmd && el->cmd[++i])
+			printf("%s ", el->cmd[i]);
+		printf("\nred : ");
+		while (el->red)
+		{
+			printf("%s(%d) ", el->red->file, el->red->type);
+			el->red = el->red->next;
+		}
+		el = el->next;
+		printf("\n");
+	}
+	printf("****************************cmdred*********************************\n\n");
 }
