@@ -6,13 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 11:54:52 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 16:17:47 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:37:44 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-int	handle_red(t_red *red)
+int	handle_redirection(t_red *red)
 {
 	int	fd;
 
@@ -23,8 +23,8 @@ int	handle_red(t_red *red)
 			return (0);
 		dup2(fd, 0);
 		close(fd);
-		// if (red->type == HEREDC)
-		 	//unlink(red->file);
+		if (red->type == HEREDC)
+			unlink(red->file);
 	}
 	else
 	{
@@ -44,7 +44,7 @@ int	redirection(t_red *red)
 {
 	while (red)
 	{
-		if (!handle_red(red))
+		if (!handle_redirection(red))
 		{
 			printf("minisehll: ");
 			perror(red->file);
