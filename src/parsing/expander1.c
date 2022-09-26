@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:37:01 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 22:18:56 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:21:39 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ char	*expander(char *line, char *wd, int i)
 				while (wd[++i] && wd[i] != CHR_S_QT)
 					;
 		}
+		else if (wd[i] == '~')
+			line = concat(line, find_env("HOME"));
 		else
 		{
 			line = concat(line, getdqts_val(0, wd + i, NULL));
