@@ -6,31 +6,25 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 22:10:31 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:18:05 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-void	ft_print_error(char *str)
-{
-	printf("minishell: cd: %s not set\n", str);
-}
-
 int	ft_get_path(char *cmd)
 {
 	char	*path;
-	char	str[1024];
 	int		i;
 
-	if (!ft_strcmp(cmd, ".") && !getcwd(str, 1024))
-		perror("cd: error retrieving current directory: \
-		getcwd: cannot access parent directories");
+	// if (!ft_strcmp(cmd, ".") && !getcwd(str, 1024))
+	// 	perror("cd: error retrieving current directory: \
+	// 	getcwd: cannot access parent directories");
 	if (!ft_strcmp(cmd, "-"))
 	{
 		path = find_env("OLDPWD");
 		if (!path)
-			return (ft_print_error("OLDPWD"), 1);
+			return (error_msg("minishell: cd: ", "OLDPWD", " not set"), 1);
 		printf("%s\n", path);
 		i = chdir(path);
 	}
@@ -38,7 +32,7 @@ int	ft_get_path(char *cmd)
 	{
 		path = find_env("HOME");
 		if (!path)
-			return (ft_print_error("HOME"), 0);
+			return (error_msg("minishell: cd: ", "HOME", " not set"), 0);
 		i = chdir(path);
 	}
 	else
@@ -97,11 +91,15 @@ void	ft_built_cd(char **str)
 	{
 		path = find_env("HOME");
 		if (!path)
-			ft_print_error("HOME");
+			error_msg("minishell: cd: ", "HOME", " not set");
 		i = chdir(path);
 	}
 	else if (!ft_strcmp(str[1] , "."))
+	{
+		if(!getcwd(old_pwd, 1024))
+			error_msg(STR_MSG_ERROR, NULL, NULL);
 		return ;
+	}
 	else
 		i = ft_get_path(str[1]);
 	if (i < 0)

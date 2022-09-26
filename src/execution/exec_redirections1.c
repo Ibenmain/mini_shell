@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:48:11 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 16:17:05 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/26 12:10:33 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
-
 
 char	*creat_tmp_file(char *file)
 {

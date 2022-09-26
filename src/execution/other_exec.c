@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:33:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 21:53:05 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:32:58 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ char	*ft_add_slache(char *cmd, char c)
 	if (!cmd)
 	{
 		tmp = malloc(sizeof(char *) * 2);
+		if (!tmp)
+			return (NULL);
 		tmp[0] = c;
 		tmp[1] = '\0';
 		return (tmp);
 	}
 	len = ft_strlen(cmd);
 	tmp = malloc(sizeof(char *) * len + 2);
+	if (!tmp)
+		return (NULL);
 	ft_strlcpy(tmp, cmd, len + 1);
 	tmp[len] = c;
 	tmp[len + 1] = '\0';
@@ -71,7 +75,7 @@ char	**ft_copy_env(void)
 	tmp = g_data.g_envlst;
 	len = ft_lstsize();
 	tab = (char **)malloc(sizeof(char *) * len + 1);
-	if (!tab)
+	if (!tab || !tmp)
 		return (NULL);
 	while (tmp)
 	{

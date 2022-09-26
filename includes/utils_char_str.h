@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:33:48 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 12:30:31 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:28:57 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define STR_PERR "Minishell: syntax error near unexpected token ` | '\n"
 # define STR_QTERR "Minishell: syntax error in unexpected token `quotes'\n"
 # define STR_REDERR "Minishell: syntax error near unexpected token `newline'\n"
+# define STR_MSG_ERROR "cd: error retrieving current directory: \
+                        getcwd: cannot access parent directories"
 # define PATH "/Users/ibenmain/goinfre/homebrew/bin:/Users/ibenmain/goinfre/.brew/bin:\
                 /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 #endif

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:40 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 21:54:41 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:17:58 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char		**ft_copy_env(void);
 
 int			handle_red(t_red *red);
 int			redirection(t_red *red);
+
+void	    error_msg(char *str1, char *str2, char *str3);
 
 #endif

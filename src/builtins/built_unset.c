@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:41:02 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 22:04:19 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:15:34 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,17 @@ t_env	*ft_delete_element(char *cmd)
 		return (tmp);
 	}
 	if (cmd_valide(cmd))
-		printf("Minishell ✗: unset: `%s': not a valid identifier\n"\
-			, cmd);
+		error_msg("Minishell ✗: unset: `", cmd, "': not a valid identifier");
 	while (tmp)
 	{
 		if (tmp->next && !ft_strcmp(cmd, tmp->next->var))
+		{
 			tmp->next = tmp->next->next;
+		}
 		tmp = tmp->next;
 	}
+	if (tmp == NULL)
+		return (g_data.g_envlst);
 	return (tmp);
 }
 
@@ -56,7 +59,7 @@ void	ft_built_unset(char **str)
 	int		i;
 
 	i = 0;
-	if (!str || !*str)
+	if (!str || !*str || !g_data.g_envlst)
 		return ;
 	while (str[++i])
 		g_data.g_envlst = ft_delete_element(str[i]);

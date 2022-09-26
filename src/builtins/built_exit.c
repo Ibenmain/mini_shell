@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 23:56:07 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/24 22:29:52 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:47:23 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_built_exit(char **str)
 		return ;
 	while (str[argc])
 		argc++;
-	if (argc - 1 >= 2)
+	if (argc > 2)
 	{
-		printf("%s\n", str[0]);
-		printf("Minishell: exit: too many arguments\n");
+		ft_putendl_fd(str[0], 2);
+		error_msg("Minishell: exit: too many arguments", NULL, NULL);
 	}
 	else
 	{

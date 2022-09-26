@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 21:45:02 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:39:03 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_not_builtin(char *cmd)
 int	ft_its_builtins(t_execlst *data)
 {
 	int	fd[2];
-
+	g_data.exit_status = 0;
 	if (!data || !data->cmd || !ft_not_builtin(data->cmd[0]))
 		return (1);
 	fd[0] = dup(0);

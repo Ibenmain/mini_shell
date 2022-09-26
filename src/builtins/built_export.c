@@ -6,13 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 21:58:49 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:48:32 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-char	**ft_cmp_env()
+char	**ft_cmp_env(void)
 {
 	char	**tab;
 	t_env	*tmp;
@@ -23,7 +23,7 @@ char	**ft_cmp_env()
 	tmp = g_data.g_envlst;
 	len = ft_lstsize();
 	tab = (char **)malloc(sizeof(char *) * len);
-	if (!tab)
+	if (!tab || !tmp)
 		return (NULL);
 	while (tmp)
 	{
@@ -84,8 +84,8 @@ int	ft_add_variable(char *cmd)
 	while (cmd[i] && cmd[i] != '+' && cmd[i] != '=')
 		i++;
 	if (is_valide(cmd, i))
-		return (printf("Minishell ✗: export: `%s': not a valid identifier\n"\
-			, cmd), 0);
+		return (error_msg("Minishell ✗: export: `", cmd, \
+			"': not a valid identifier"), 0);
 	var = ft_substr(cmd, 0, i);
 	if (cmd[i] == '\0')
 		val = NULL;

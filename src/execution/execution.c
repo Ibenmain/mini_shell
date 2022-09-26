@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 21:51:23 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:55:13 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	exec_other_cmd(t_execlst *data, int fd[])
 	// 	path = ft_spare_path(tmp_cmd[0]);
 	if (execve(path, tmp_cmd, env_tab) == -1)
 	{
-		printf("Minishell: %s: command not found\n", tmp_cmd[0]);
+		error_msg("Minishell: ", tmp_cmd[0], ": command not found");
 		exit (1);
 	}
 }
@@ -126,7 +126,7 @@ int	check_access(t_execlst *el)
 	{
 		if (access(el->cmd[0], X_OK) != 0)
 		{
-			printf("Minishell: %s: Permission denied\n", el->cmd[0]);
+			error_msg("Minishell: ", el->cmd[0], ": Permission denied");
 			return (1);
 		}
 	}
