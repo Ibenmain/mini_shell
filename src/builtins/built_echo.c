@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 15:56:07 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 22:40:01 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:45:26 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_check_newline(char *str)
 	int	i;
 
 	i = 0;
+	if (str[1] == '\0')
+		return (1);
 	while (str[++i])
 	{
 		if (str[i] != 'n')

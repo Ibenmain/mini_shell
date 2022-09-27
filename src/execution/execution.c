@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 22:14:19 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:08:25 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_get_path_of_cmd(char *word)
 	i = -1;
 	if (!word || !*word || !g_data.g_envlst)
 		return (NULL);
-	if (access(word, X_OK) == 0)
-		return (word);
 	path = find_env("PATH");
 	tab = ft_split(path, ':');
 	if (!tab || !*tab)
@@ -68,14 +66,14 @@ void	exec_other_cmd(t_execlst *data, int fd[])
 
 	tmp_cmd = data->cmd;
 	env_tab = ft_copy_env();
-	if (check_access(data))
-		exit(1);
 	ft_dup_one(data, fd);
 	if (!ft_its_builtins(data) || !redirection(data->red))
 		exit (1);
 	if (!tmp_cmd || !tmp_cmd[0])
 		exit(0);
-	path = ft_get_path_of_cmd(tmp_cmd[0]);
+	path = tmp_cmd[0];
+	if (!((tmp_cmd[0][0] == '.' && tmp_cmd[0][1] == '/') || (tmp_cmd[0][0] == '/')))
+		path = ft_get_path_of_cmd(tmp_cmd[0]);
 	if (execve(path, tmp_cmd, env_tab) == -1)
 	{
 		error_msg("Minishell: ", tmp_cmd[0], ": command not found");
@@ -138,8 +136,6 @@ void	ft_executer_cmd(t_execlst *el)
 	int	status;
 
 	input = dup(0);
-	// if (check_access(el))
-	// 	return ;
 	if (el && !el->next && !ft_its_builtins(el))
 		return ;
 	ft_cmd_to_exec(el);
