@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:40 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/26 17:44:02 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:07:51 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int			redirection(t_red *red);
 
 void		error_msg(char *str1, char *str2, char *str3);
 int			check_access(t_execlst *el);
+void		exec_other_cmd(t_execlst *data, int fd[]);
+char		*ft_get_path_of_cmd(char *word);
 
 #endif

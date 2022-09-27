@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 13:18:05 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:33:24 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_get_path(char *cmd)
 {
 	char	*path;
 	int		i;
+	// char	str[1024];
 
 	// if (!ft_strcmp(cmd, ".") && !getcwd(str, 1024))
 	// 	perror("cd: error retrieving current directory: \
@@ -28,19 +29,19 @@ int	ft_get_path(char *cmd)
 		printf("%s\n", path);
 		i = chdir(path);
 	}
-	else if (!ft_strcmp(cmd, "~"))
-	{
-		path = find_env("HOME");
-		if (!path)
-			return (error_msg("minishell: cd: ", "HOME", " not set"), 0);
-		i = chdir(path);
-	}
+	// else if (!ft_strcmp(cmd, "~"))
+	// {
+	// 	path = find_env("HOME");
+	// 	if (!path)
+	// 		return (error_msg("minishell: cd: ", "HOME", " not set"), 0);
+	// 	i = chdir(path);
+	// }
 	else
 		i = chdir(cmd);
 	return (i);
 }
 
-void	modife_enirement(char *old_pwd)
+void	change_enirement(char *old_pwd)
 {
 	int		find;
 	t_env	*tmp;
@@ -61,7 +62,7 @@ void	modife_enirement(char *old_pwd)
 			ft_creat_node(join_add_eq("OLDPWD", old_pwd)));
 }
 
-void	modife_enirement_pwd(void)
+void	change_enirement_pwd(void)
 {
 	char	buffer[1024];
 	char	*str;
@@ -76,6 +77,15 @@ void	modife_enirement_pwd(void)
 			tmp->val = str;
 		tmp = tmp->next;
 	}
+}
+
+void	ft_change_pwd_oldpwd(int i, char *old_pwd)
+{
+	if (i < 0)
+		perror("cd");
+	if (i != 1)
+		change_enirement(old_pwd);
+	change_enirement_pwd();
 }
 
 void	ft_built_cd(char **str)
@@ -94,17 +104,13 @@ void	ft_built_cd(char **str)
 			error_msg("minishell: cd: ", "HOME", " not set");
 		i = chdir(path);
 	}
-	else if (!ft_strcmp(str[1] , "."))
+	else if (!ft_strcmp(str[1], "."))
 	{
-		if(!getcwd(old_pwd, 1024))
+		if (!getcwd(old_pwd, 1024))
 			error_msg(STR_MSG_ERROR, NULL, NULL);
 		return ;
 	}
 	else
 		i = ft_get_path(str[1]);
-	if (i < 0)
-		perror("cd");
-	if (i != 1)
-		modife_enirement(old_pwd);
-	modife_enirement_pwd();
+	ft_change_pwd_oldpwd(i, old_pwd);
 }

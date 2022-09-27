@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 22:54:39 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 21:50:43 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:40:37 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_lstadd_back(t_env **alst, t_env *new)
 	}
 }
 
-int	ft_lstsize()
+int	ft_lstsize(void)
 {
 	t_env	*tmp;
 	int		size;

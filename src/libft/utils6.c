@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 17:03:53 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 18:37:05 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:40:54 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ int	ft_atoi(const char *str)
 		return (signe * nb);
 	return (nb);
 }
-

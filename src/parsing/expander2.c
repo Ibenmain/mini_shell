@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 01:10:03 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 19:37:28 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:42:40 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*expand_red(t_enum type, char *file, int delmtr)
 		pid = fork();
 		if (pid == 0)
 		{
-			signal(SIGINT,test);
+			signal(SIGINT, test);
 			file_name = exec_hrdc(file_name, delmtr);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:02:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/26 12:17:48 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:22:49 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_split(char *s, char c);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strdup(char *s1);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
-int	    ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 void	ft_lstadd_back(t_env **alst, t_env *new);
 char	*join_add_eq(char *s1, char *s2);
 #endif

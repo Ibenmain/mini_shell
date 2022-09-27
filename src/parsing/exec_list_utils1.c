@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/22 20:37:27 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:41:34 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_execlst	*init_execlst(void)
 	e->cmd = NULL;
 	e->red = NULL;
 	e->next = NULL;
-	return ( e);
+	return (e);
 }
 
 t_execlst	*getcmd(t_execlst *e, char *val)
@@ -64,7 +64,7 @@ t_enum	get_redtype(char *val)
 
 t_red	*new_red(t_tok *tok)
 {
-	t_red *head;
+	t_red	*head;
 
 	head = malloc(sizeof(t_red));
 	if (!head)

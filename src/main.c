@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/25 21:59:55 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:23:45 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ void	desplay_shell(void)
 
 int	main(int argc, char **av, char **env_)
 {
-	argc = 0;
-	av = NULL;
-
+	(void)argc;
+	(void)av;
 	g_data.g_envlst = init_env(env_);
 	//print_env(g_data.g_envlst);
 	desplay_shell();

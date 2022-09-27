@@ -11,7 +11,8 @@ SRC_PRS = src/parsing/tokenizer.c src/parsing/parser1.c src/parsing/parser2.c \
 
 
 SRC_EXEC = src/execution/exec_redirections1.c src/execution/other_exec.c \
-	src/execution/redirection.c src/execution/execution.c src/execution/error_msg.c
+	src/execution/redirection.c src/execution/execution.c src/execution/error_msg.c \
+	src/execution/exec_cmd.c
 
 SRC_BUIL = src/builtins/built_cd.c src/builtins/built_echo.c src/builtins/built_env.c \
 	src/builtins/built_exit.c src/builtins/built_export.c src/builtins/built_pwd.c \

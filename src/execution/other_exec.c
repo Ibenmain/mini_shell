@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:33:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 13:32:58 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:08:51 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,33 @@ char	*ft_add_slache(char *cmd, char c)
 	return (tmp);
 }
 
-char	*get_path(char *cmd)
-{
-	char	*path;
-	char	**tab;
-	char	*retn;
-	int		i;
+// char	*get_path(char *cmd)
+// {
+// 	char	*path;
+// 	char	**tab;
+// 	char	*retn;
+// 	int		i;
 
-	i = -1;
-	retn = NULL;
-	if (!cmd || !*cmd || !g_data.g_envlst)
-		return (NULL);
-	path = find_env("PATH");
-	tab = ft_split(path, ':');
-	while (tab[++i])
-	{
-		if (tab[i])
-		{
-			tab[i] = ft_add_slache(tab[i], '/');
-			tab[i] = concat(tab[i], cmd);
-			if (!retn)
-				retn = tab[i];
-		}
-		else
-			return (NULL);
-	}
-	return (retn);
-}
+// 	i = -1;
+// 	retn = NULL;
+// 	if (!cmd || !*cmd || !g_data.g_envlst)
+// 		return (NULL);
+// 	path = find_env("PATH");
+// 	tab = ft_split(path, ':');
+// 	while (tab[++i])
+// 	{
+// 		if (tab[i])
+// 		{
+// 			tab[i] = ft_add_slache(tab[i], '/');
+// 			tab[i] = concat(tab[i], cmd);
+// 			if (!retn)
+// 				retn = tab[i];
+// 		}
+// 		else
+// 			return (NULL);
+// 	}
+// 	return (retn);
+// }
 
 char	**ft_copy_env(void)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:15:29 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/21 21:06:08 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:40:24 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_strdup_trim(char *s1, char *set)
 		return (trim);
 	}
 	trim[k] = CHR_END;
-	return ( trim);
+	return (trim);
 }
 
 char	*ft_strtrim(char *s1, char *set)
