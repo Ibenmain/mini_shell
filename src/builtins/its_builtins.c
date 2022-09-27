@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 17:17:16 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:27:28 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,8 @@ int	ft_not_builtin(char *cmd)
 	return (0);
 }
 
-int	ft_its_builtins(t_execlst *data)
+void	ft_exec_bult(t_execlst *data)
 {
-	int	fd[2];
-
-	if (!data || !data->cmd || !ft_not_builtin(data->cmd[0]))
-		return (1);
-	fd[0] = dup(0);
-	fd[1] = dup(1);
-	if (redirection(data->red) == 0)
-		;
 	if (!ft_strcmp(data->cmd[0], "pwd"))
 		ft_built_pwd(data->cmd[0]);
 	else if (!ft_strcmp(data->cmd[0], "env"))
@@ -46,5 +38,22 @@ int	ft_its_builtins(t_execlst *data)
 		ft_built_unset(data->cmd);
 	else if (!ft_strcmp(data->cmd[0], "exit"))
 		ft_built_exit(data->cmd);
-	return (dup2(fd[0], 0), dup2(fd[1], 1), close(fd[0]), close(fd[1]), 0);
+}
+
+int	ft_its_builtins(t_execlst *data)
+{
+	int	fd[2];
+
+	if (!data || !data->cmd || !ft_not_builtin(data->cmd[0]))
+		return (1);
+	fd[0] = dup(0);
+	fd[1] = dup(1);
+	if (redirection(data->red) == 0)
+		;
+	ft_exec_bult(data);
+	dup2(fd[0], 0);
+	dup2(fd[1], 1);
+	close(fd[0]);
+	close(fd[1]);
+	return (0);
 }

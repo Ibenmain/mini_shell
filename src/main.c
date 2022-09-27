@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 12:23:45 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:07:22 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handel_signal(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -35,6 +35,7 @@ void	desplay_shell(void)
 
 	signal(SIGINT, handel_signal);
 	signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
 	while (1)
 	{
 		line = readline(STR_PROMPT);

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 11:54:52 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 17:37:44 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:32:01 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	redirection(t_red *red)
 	{
 		if (!handle_redirection(red))
 		{
-			printf("minisehll: ");
-			perror(red->file);
+			error_msg("Minisehll: ", red->file, ": No such file or directory");
 			return (0);
 		}
 		red = red->next;

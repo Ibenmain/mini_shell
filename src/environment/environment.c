@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 00:11:20 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/25 21:13:23 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:22:59 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_env	*init_env(char **env)
 	int		i;
 	t_env	*head;
 	char	s[1024];
+	char	**split;
 
 	i = 0;
 	head = NULL;
@@ -86,7 +87,8 @@ t_env	*init_env(char **env)
 	}
 	while (env[i])
 	{
-		if (ft_strcmp(*ft_split(env[i], '='), "OLDPWD"))
+		split = ft_split(env[i], '=');
+		if (ft_strcmp(split[0], "OLDPWD"))
 			ft_lstadd_back(&head, ft_creat_node(env[i]));
 		i++;
 	}
