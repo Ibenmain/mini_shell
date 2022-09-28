@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:40 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 12:07:51 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:37:12 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define EXECUTION_H
 # include"libft.h"
 # include"parsing.h"
+# include <errno.h>
 
 int			ft_index_key(char *data);
 char		*creat_tmp_file(char *file);

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 23:56:07 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 12:47:23 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:28:05 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_built_exit(char **str)
 	int		argc;
 
 	argc = 0;
+	status = 0;
 	if (!str || !*str)
 		return ;
 	while (str[argc])
@@ -32,7 +33,7 @@ void	ft_built_exit(char **str)
 		if (!str[1])
 		{
 			printf("%s\n", str[0]);
-			exit(0);
+			exit(g_data.exit_status);
 		}
 		status = ft_atoi(str[1]);
 		printf("%s\n", str[0]);

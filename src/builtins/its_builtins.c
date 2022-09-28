@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 17:27:28 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:29:42 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	ft_its_builtins(t_execlst *data)
 	dup2(fd[1], 1);
 	close(fd[0]);
 	close(fd[1]);
+	g_data.exit_status = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 18:16:24 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 00:15:36 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	ft_add_variable(char *cmd)
 void	ft_built_export(char **cmd)
 {
 	int		i;
+	// char	**tab;
 
 	i = 1;
 	if (!cmd[1])

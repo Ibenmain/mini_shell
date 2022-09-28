@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 18:59:55 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:34:07 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,7 @@ void	handler(int sig)
 {
 	if (sig == SIGQUIT)
 		ft_putendl_fd("Quit: 3", 1);
-	wait(&g_data.exit_status);
 }
-
-// void	__handler(int signal)
-// {
-// 	if (signal == SIGINT)
-// 		ft_putchar_fd('\n', 1);
-// }
 
 void	ft_cmd_to_exec(t_execlst *el)
 {
@@ -62,7 +55,6 @@ void	ft_cmd_to_exec(t_execlst *el)
 			return (perror("fork"));
 		if (id == 0)
 		{
-			// signal(SIGINT, __handler);
 			signal(SIGQUIT, SIG_DFL);
 			signal(SIGINT, SIG_DFL);
 			exec_other_cmd(el, fd);
@@ -85,14 +77,18 @@ void	ft_executer_cmd(t_execlst *el)
 		return ;
 	ft_cmd_to_exec(el);
 	signal(SIGINT, SIG_IGN);
-	while (el)
+	while (1)
 	{
-		wait(&status);
-		el = el->next;
+		if (wait(&status) == -1)
+			break ;
 	}
-	if (WIFEXITED(status))
-		g_data.exit_status = 127;
-	// if (WIFSIGNALED(status))
-	// 	g_data.exit_status = 
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == 2)
+			write(1, "\n", 1);
+		g_data.exit_status = 128 + WTERMSIG(status);
+	}
+	else
+		g_data.exit_status = WEXITSTATUS(status);
 	dup2(input, 0);
 }

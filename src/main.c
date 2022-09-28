@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 16:11:56 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 18:07:22 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:03:13 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	desplay_shell(void)
 		line = readline(STR_PROMPT);
 		if (!line)
 		{
-			write (1, "exit\n", 5);
+			write (1, " exit\n", 5);
 			exit(0);
 		}
 		if (line[0])

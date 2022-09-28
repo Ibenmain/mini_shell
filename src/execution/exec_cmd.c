@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:04:43 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 12:10:58 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:44:07 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,33 @@ void	ft_dup_one(t_execlst *el, int fd[])
 	}
 }
 
+void	ft_execve_cmd(char *path, char **tmp_cmd, char **env_tab)
+{
+	if (execve(path, tmp_cmd, env_tab) == -1)
+	{
+		if (access(path, F_OK) != 1)
+		{
+			if (errno == EACCES)
+			{
+				error_msg("Minishell: ", tmp_cmd[0], ": Permission denied");
+				g_data.exit_status = 126;
+			}
+			else if (errno == EFAULT)
+			{
+				error_msg("Minishell: ", tmp_cmd[0], ": command not found");
+				g_data.exit_status = 127;
+			}
+			else if (errno == ENOENT)
+			{
+				error_msg("Minishell: ", tmp_cmd[0], \
+					": No such file or directory");
+				g_data.exit_status = 127;
+			}
+		}	
+		exit(g_data.exit_status);
+	}
+}
+
 void	exec_other_cmd(t_execlst *data, int fd[])
 {
 	char	**tmp_cmd;
@@ -75,9 +102,5 @@ void	exec_other_cmd(t_execlst *data, int fd[])
 	if (!((tmp_cmd[0][0] == '.' && tmp_cmd[0][1] == '/') \
 		|| (tmp_cmd[0][0] == '/')))
 		path = ft_get_path_of_cmd(tmp_cmd[0]);
-	if (execve(path, tmp_cmd, env_tab) == -1)
-	{
-		error_msg("Minishell: ", tmp_cmd[0], ": command not found");
-		exit(1);
-	}
+	ft_execve_cmd(path, tmp_cmd, env_tab);
 }

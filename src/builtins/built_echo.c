@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 15:56:07 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 01:45:26 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:51:43 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	ft_built_echo(char **str)
 {
 	int		i;
 	int		k;
+	char	**tmp;
 
-	i = 1;
 	k = 0;
+	i = 1;
+	tmp = str;
 	if (!str || !*str || ft_strcmp(str[0], "echo"))
 		return ;
 	while (str[i] && str[i][0] == '-')

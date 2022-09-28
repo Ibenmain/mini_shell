@@ -1,0 +1,15 @@
+dup();
+dup2();
+fork();
+pipe();
+access();
+execve();
+perror();
+close();
+signal();
+wait();
+exit();
+WIFSIGNALED();
+WTERMSIG();
+WEXITSTATUS();
+errno;
