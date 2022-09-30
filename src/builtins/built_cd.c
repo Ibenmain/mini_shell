@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 12:33:24 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:30:13 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ int	ft_get_path(char *cmd)
 {
 	char	*path;
 	int		i;
-	// char	str[1024];
 
-	// if (!ft_strcmp(cmd, ".") && !getcwd(str, 1024))
-	// 	perror("cd: error retrieving current directory: \
-	// 	getcwd: cannot access parent directories");
 	if (!ft_strcmp(cmd, "-"))
 	{
 		path = find_env("OLDPWD");
@@ -29,13 +25,6 @@ int	ft_get_path(char *cmd)
 		printf("%s\n", path);
 		i = chdir(path);
 	}
-	// else if (!ft_strcmp(cmd, "~"))
-	// {
-	// 	path = find_env("HOME");
-	// 	if (!path)
-	// 		return (error_msg("minishell: cd: ", "HOME", " not set"), 0);
-	// 	i = chdir(path);
-	// }
 	else
 		i = chdir(cmd);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:04:43 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/29 23:54:43 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:29:49 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_execve_cmd(char *path, char **tmp_cmd, char **env_tab)
 					": No such file or directory");
 				g_data.exit_status = 127;
 			}
-		}	
+		}
 		exit(g_data.exit_status);
 	}
 }
