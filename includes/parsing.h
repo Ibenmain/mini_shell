@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/28 14:34:29 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:31:01 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_data
 	t_env			*g_envlst;
 	t_grb_clltr		*g_grb;
 	int				exit_status;
+	int				pipe;
 	struct s_data	*next;
 }t_data;
 

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:04:43 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/28 16:44:07 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:54:43 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,13 @@ char	*ft_get_path_of_cmd(char *word)
 	return (NULL);
 }
 
-// int	check_access(t_execlst *el)
-// {
-// 	if (el->cmd && el->cmd[0][0] == '.' && el->cmd[0][1] == '/')
-// 	{
-// 		if (access(el->cmd[0], X_OK) != 0)
-// 		{
-// 			error_msg("Minishell: ", el->cmd[0], ": No such file or directory");
-// 			return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
-
 void	ft_dup_one(t_execlst *el, int fd[])
 {
 	if (el->next)
 	{
 		dup2(fd[1], 1);
-		close(fd[1]);
 		close(fd[0]);
+		close(fd[1]);
 	}
 }
 

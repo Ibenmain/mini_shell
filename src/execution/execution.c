@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/28 16:34:07 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:40:29 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_dup_zero(t_execlst *el, int fd[])
 	if (el->next)
 	{
 		dup2(fd[0], 0);
-		close(fd[0]);
 		close(fd[1]);
+		close(fd[0]);
 	}
 	else
 		close(0);
@@ -70,7 +70,6 @@ void	ft_cmd_to_exec(t_execlst *el)
 void	ft_executer_cmd(t_execlst *el)
 {
 	int	input;
-	int	status;
 
 	input = dup(0);
 	if (el && !el->next && !ft_its_builtins(el))
@@ -79,16 +78,17 @@ void	ft_executer_cmd(t_execlst *el)
 	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
-		if (wait(&status) == -1)
+		if (wait(&g_data.exit_status) == -1)
 			break ;
 	}
-	if (WIFSIGNALED(status))
+	if (WIFSIGNALED(g_data.exit_status))
 	{
-		if (WTERMSIG(status) == 2)
+		if (WTERMSIG(g_data.exit_status) == 2)
 			write(1, "\n", 1);
-		g_data.exit_status = 128 + WTERMSIG(status);
+		g_data.exit_status = 128 + WTERMSIG(g_data.exit_status);
 	}
 	else
-		g_data.exit_status = WEXITSTATUS(status);
+		g_data.exit_status = WEXITSTATUS(g_data.exit_status);
 	dup2(input, 0);
+	close (input);
 }

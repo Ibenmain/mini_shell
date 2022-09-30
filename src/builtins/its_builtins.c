@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/28 15:29:42 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:20:42 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@ int	ft_not_builtin(char *cmd)
 		!ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
+}
+
+char	*ft_change_to_tolower(t_execlst *el)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = malloc(sizeof(char *) * ft_strlen(el->cmd[0]));
+	if (!str)
+		return (NULL);
+	while (el->cmd[0][i])
+	{
+		if (el->cmd[0][i] >= 65 && el->cmd[0][i] <= 90)
+			str[i] = el->cmd[0][i] + 32;
+		else
+			str[i] = el->cmd[0][i];
+		i++;
+	}
+	return (str);
 }
 
 void	ft_exec_bult(t_execlst *data)
@@ -42,8 +62,10 @@ void	ft_exec_bult(t_execlst *data)
 
 int	ft_its_builtins(t_execlst *data)
 {
-	int	fd[2];
+	int		fd[2];
+	char	*str;
 
+	str = ft_change_to_tolower(data);
 	if (!data || !data->cmd || !ft_not_builtin(data->cmd[0]))
 		return (1);
 	fd[0] = dup(0);
