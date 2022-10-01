@@ -1,9 +1,0 @@
-ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls
-fork: Resource temporarily unavailable
-------------------------------------------------------------------------------------------
-echo ~/ls
-~ --> /Users/ibenmain/ls
-
-redirect without  command (> $USER) error
-
-echo -n -n ~ sl //error
