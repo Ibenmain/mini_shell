@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "_errno_t.h": "c",
-        "errno.h": "c"
-    }
-}
