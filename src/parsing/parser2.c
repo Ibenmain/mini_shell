@@ -6,7 +6,7 @@
 /*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:11:22 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/21 21:06:41 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/10/03 21:57:53 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ t_tok	*lstnew(char *content, t_enum type)
 
 	if (!content)
 		return (NULL);
-	element = (t_tok *)malloc(sizeof(t_tok));
-	if (!element)
-		return (NULL);
+	element = (t_tok *)ft_malloc(sizeof(t_tok), add_garbage_in);
 	element->value = content;
 	element->type = type;
 	element->next = NULL;

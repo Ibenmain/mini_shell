@@ -6,13 +6,13 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 15:20:59 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 13:08:40 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:04:41 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-void	ft_built_env()
+void	ft_built_env(void)
 {
 	t_env	*env;
 

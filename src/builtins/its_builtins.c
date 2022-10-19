@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   its_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:03:01 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/30 00:20:42 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:44:00 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char	*ft_change_to_tolower(t_execlst *el)
 	int		i;
 
 	i = 0;
-	str = malloc(sizeof(char *) * ft_strlen(el->cmd[0]));
-	if (!str)
+	if (!el || !el->cmd)
 		return (NULL);
+	str = ft_malloc(sizeof(char *) * ft_strlen(el->cmd[0]), add_garbage_in);
 	while (el->cmd[0][i])
 	{
 		if (el->cmd[0][i] >= 65 && el->cmd[0][i] <= 90)
@@ -65,8 +65,9 @@ int	ft_its_builtins(t_execlst *data)
 	int		fd[2];
 	char	*str;
 
+	g_data.exit_status = 0;
 	str = ft_change_to_tolower(data);
-	if (!data || !data->cmd || !ft_not_builtin(data->cmd[0]))
+	if (!data || !data->cmd || !str || !ft_not_builtin(data->cmd[0]))
 		return (1);
 	fd[0] = dup(0);
 	fd[1] = dup(1);
@@ -77,6 +78,5 @@ int	ft_its_builtins(t_execlst *data)
 	dup2(fd[1], 1);
 	close(fd[0]);
 	close(fd[1]);
-	g_data.exit_status = 0;
 	return (0);
 }

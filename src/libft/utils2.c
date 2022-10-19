@@ -6,7 +6,7 @@
 /*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 03:48:42 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/21 21:06:12 by kfaouzi          ###   ########.fr       */
+/*   Updated: 2022/10/04 16:14:33 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ char	*getval(char *s, int start, int len)
 		s_len = sz;
 	else
 		s_len = len + 1;
-	sub_tkn = malloc(s_len);
-	if (!(sub_tkn))
-		return (NULL);
+	sub_tkn = ft_malloc(s_len, add_garbage_in);
 	sub_tkn[--s_len] = CHR_END;
 	while (--s_len >= 0)
 		sub_tkn[s_len] = s[s_len + start];
@@ -73,9 +71,7 @@ char	*concat(char *s1, char *s2)
 		i++;
 	while (s2[j])
 		j++;
-	new = malloc(i + j + 1);
-	if (!new)
-		return (NULL);
+	new = ft_malloc(i + j + 1, add_garbage_in);
 	new[i + j] = CHR_END;
 	while (--j >= 0)
 		new[i + j] = s2[j];
@@ -86,12 +82,15 @@ char	*concat(char *s1, char *s2)
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	int	i;
+
+	i = 0;
 	if (s)
 	{
-		while (*s)
+		while (s[i])
 		{
-			write(fd, s, 1);
-			s++;
+			write(fd, &s[i], 1);
+			i++;
 		}
 	}
 }

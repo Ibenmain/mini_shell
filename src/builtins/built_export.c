@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:38:14 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/28 00:15:36 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:07:27 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
-
-char	**ft_cmp_env(void)
-{
-	char	**tab;
-	t_env	*tmp;
-	int		i;
-	int		len;
-
-	i = -1;
-	tmp = g_data.g_envlst;
-	len = ft_lstsize();
-	tab = (char **)malloc(sizeof(char *) * len);
-	if (!tab || !tmp)
-		return (NULL);
-	while (tmp)
-	{
-		if (tmp->val == NULL)
-			tab[++i] = join_add_eq(tmp->var, "");
-		else
-			tab[++i] = join_add_eq(tmp->var, tmp->val);
-		tmp = tmp->next;
-	}
-	tab[++i] = NULL;
-	return (tab);
-}
 
 int	is_valide(char *cmd, int i)
 {
@@ -51,9 +26,7 @@ void	ft_add_to_env(char *var, char *val, bool plus)
 	t_env	*tmp;
 
 	tmp = g_data.g_envlst;
-	new = malloc(sizeof(t_env));
-	if (!new)
-		return ;
+	new = ft_malloc(sizeof(t_env), add_garbage_out);
 	while (tmp)
 	{
 		if ((tmp->var) && !ft_strcmp(tmp->var, var))
@@ -105,7 +78,6 @@ int	ft_add_variable(char *cmd)
 void	ft_built_export(char **cmd)
 {
 	int		i;
-	// char	**tab;
 
 	i = 1;
 	if (!cmd[1])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:04:43 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/30 17:29:49 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:02:27 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_get_path_of_cmd(char *word)
 	path = find_env("PATH");
 	tab = ft_split(path, ':');
 	if (!tab || !*tab)
-		exit (0);
+		return (NULL);
 	while (tab[++i])
 	{
 		tab[i] = ft_add_slache(tab[i], '/');

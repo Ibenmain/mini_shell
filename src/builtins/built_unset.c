@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:41:02 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/26 13:15:34 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:06:57 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	cmd_valide(char *cmd)
 	int		i;
 
 	i = -1;
-	if (!ft_isalpha(cmd[0]))
+	if (cmd[0] != '_' && !ft_isalpha(cmd[0]))
 		return (1);
 	while (cmd[++i])
 	{
-		if ((47 < cmd[0] && cmd[0] < 58) || !ft_isalnum(cmd[i]))
+		if (cmd[i] == '_' || ft_isalnum(cmd[i]))
+			continue ;
+		else
 			return (1);
 	}
 	return (0);
@@ -31,6 +33,7 @@ t_env	*ft_delete_element(char *cmd)
 {
 	t_env	*tmp;
 	t_env	*tp;
+	t_env	*tmp_fr;
 
 	tmp = g_data.g_envlst;
 	tp = g_data.g_envlst;
@@ -45,6 +48,7 @@ t_env	*ft_delete_element(char *cmd)
 	{
 		if (tmp->next && !ft_strcmp(cmd, tmp->next->var))
 		{
+			tmp_fr = tmp->next;
 			tmp->next = tmp->next->next;
 		}
 		tmp = tmp->next;

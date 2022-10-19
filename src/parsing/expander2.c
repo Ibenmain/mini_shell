@@ -3,100 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   expander2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 01:10:03 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 12:42:40 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 04:07:01 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-int	sizehrdc(char *file)
+int	get_c(void)
 {
-	int	i;
-	int	sz;
-
-	sz = 0;
-	i = -1;
-	while (file[++i])
-	{
-		if (file[i] == '\'')
-			while (file[++i] && file[i] != '\'')
-				sz++;
-		else if (file[i] && file[i] == '\"')
-			while (file[++i] && file[i] != '\"')
-				sz++;
-		else
-		{
-			sz++;
-			while (file[++i] && file[i] != '\"' && file[i] != '\'')
-				sz++;
-			if (!file[i] || file[i] == '\"' || file[i] == '\'')
-				i--;
-		}
-	}
-	return (sz);
+	return (0);
 }
 
-char	*expand_hrdc(int i, int j, char *name_file, char *file)
+void	signals(void)
 {
-	i = sizehrdc(file);
-	name_file = malloc(i + 1);
-	if (!name_file)
-		return (NULL);
-	j = 0;
-	i = -1;
-	while (file[++i])
-	{
-		if (file[i] == '\'')
-			while (file[++i] && file[i] != '\'')
-				name_file[j++] = file[i];
-		else if (file[i] == '\"')
-			while (file[++i] && file[i] != '\"')
-				name_file[j++] = file[i];
-		else
-		{
-			name_file[j++] = file[i];
-			while (file[++i] && file[i] != '\'' && file[i] != '\"')
-				name_file[j++] = file[i];
-			if (!file[i] || file[i] == '\"' || file[i] == '\'')
-				i--;
-		}
-	}
-	return (name_file[j] = '\0', name_file);
+	rl_event_hook = get_c;
+	signal(SIGINT, handel_sig_hr);
+	signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
 }
 
-void	test(int i)
+int	exec_hrdc(char *buffer, char *file, int fd, int del)
 {
-	(void)i;
-	write(1, "\n", 1);
-	//rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	close(0);
+	buffer = readline("> ");
+	if (!buffer)
+		return (0);
+	if (g_data.exec == -1)
+		return (-1);
+	if (!ft_strcmp(file, buffer))
+		return (free(buffer), 0);
+	put_in_fd(buffer, fd, del);
+	free(buffer);
+	return (1);
 }
 
-char	*expand_red(t_enum type, char *file, int delmtr)
+int	expand_red(t_enum type, char **file, int delmtr)
 {
-	char	*file_name;
-	int		pid;
+	int		pi[2];
+	int		a;
 
+	if (pipe(pi) == -1)
+		return (-1);
+	signals();
 	if (type == HEREDC)
 	{
-		file_name = expand_hrdc(0, 0, NULL, file);
-		pid = fork();
-		if (pid == 0)
+		*file = expand_hrdc(0, 0, NULL, *file);
+		while (1)
 		{
-			signal(SIGINT, test);
-			file_name = exec_hrdc(file_name, delmtr);
+			a = exec_hrdc(NULL, *file, pi[1], delmtr);
+			if (a == 0)
+				break ;
+			else if (a == -1)
+				return (0);
 		}
-		else
-			wait(&g_data.exit_status);
+		return (close(pi[1]), pi[0]);
 	}
 	else
-		file_name = expander(NULL, file, 0);
-	return (file_name);
+		return (ft_open(type, file));
 }
 
 t_execlst	*expand_list(t_execlst *el)
@@ -111,16 +76,14 @@ t_execlst	*expand_list(t_execlst *el)
 		i = -1;
 		while (tmp->cmd && tmp->cmd[++i])
 		{
-			tmp->cmd[i] = expander(NULL, tmp->cmd[i], 0);
+			tmp->cmd[i] = _expander(tmp->cmd[i], 0);
 			if (!tmp->cmd[i])
 				return (NULL);
 		}
 		t = tmp->red;
 		while (t)
 		{
-			t->file = expand_red(t->type, t->file, t->dlmtr);
-			if (!t->file)
-				return (NULL);
+			t->fd = expand_red(t->type, &t->file, t->dlmtr);
 			t = t->next;
 		}
 		tmp = tmp->next;

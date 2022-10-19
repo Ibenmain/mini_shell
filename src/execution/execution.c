@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:03:22 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/30 20:26:20 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:36:37 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_dup_zero(t_execlst *el, int fd[])
 	if (el->next)
 	{
 		dup2(fd[0], 0);
-		close(fd[1]);
 		close(fd[0]);
+		close(fd[1]);
 	}
 	else
 		close(0);
@@ -47,6 +47,7 @@ void	ft_cmd_to_exec(t_execlst *el)
 	int	id;
 	int	fd[2];
 
+	g_data.id_cat = 1;
 	while (el)
 	{
 		ft_pipe(el, fd);
@@ -59,7 +60,6 @@ void	ft_cmd_to_exec(t_execlst *el)
 			signal(SIGINT, SIG_DFL);
 			exec_other_cmd(el, fd);
 		}
-		signal(SIGQUIT, handler);
 		ft_dup_zero(el, fd);
 		el = el->next;
 	}
@@ -74,7 +74,6 @@ void	ft_executer_cmd(t_execlst *el)
 	if (el && !el->next && !ft_its_builtins(el))
 		return ;
 	ft_cmd_to_exec(el);
-	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
 		if (wait(&status) == -1)
@@ -84,12 +83,12 @@ void	ft_executer_cmd(t_execlst *el)
 	{
 		if (WTERMSIG(status) == 2)
 			write(1, "\n", 1);
+		if (WTERMSIG(status) == SIGQUIT)
+			write(1, "Quit: 3\n", 8);
 		g_data.exit_status = 128 + WTERMSIG(status);
 	}
 	else if (WIFEXITED(status))
-	{
 		g_data.exit_status = WEXITSTATUS(status);
-	}
 	dup2(input, 0);
 	close (input);
 }

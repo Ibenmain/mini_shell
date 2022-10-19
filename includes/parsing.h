@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 07:38:32 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/29 21:31:01 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:05:14 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define PARSING_H
 
 /**
- * @brief 
+ * @brief
  * the type considered as enum 
  * of each word in the entred line
  */
@@ -58,6 +58,7 @@ typedef struct s_red
 {
 	t_enum			type;
 	char			*file;
+	int				fd;
 	int				dlmtr;
 	struct s_red	*next;
 }t_red;
@@ -97,10 +98,16 @@ typedef struct s_grb_collector
 typedef struct s_data
 {
 	t_env			*g_envlst;
-	t_grb_clltr		*g_grb;
+	int				is_running;
+	t_grb_clltr		*g_grb_inside;
+	t_grb_clltr		*g_grb_outside;
 	int				exit_status;
-	int				pipe;
+	char			**g_env;
+	int				id_cat;
+	int				exec;
 	struct s_data	*next;
+	char			*pwd;
+	int				first;
 }t_data;
 
 t_data	g_data;
@@ -127,10 +134,22 @@ int			help_pipe(t_tok **token);
 int			add_tknex(t_execlst **token, t_execlst **new);
 t_execlst	*get_execlst(t_tok *tkns);
 t_execlst	*getred(t_execlst *e, t_tok *tok);
-// char		*exec_hrdc(t_red *red);
 t_red		*getredlst(t_red *red, t_tok *tok);
 t_enum		get_redtype(char *val);
 t_execlst	*getcmd(t_execlst *e, char *val);
 t_execlst	*init_execlst(void);
 
+t_execlst	*expand_list(t_execlst *el);
+int			add_sqt(char *line, char **expand_str);
+int			add_words(char *line, char **expand_str);
+int			handel_dlr(char *line, char **expand_str);
+char		*expander_hrdc(char *del);
+char		*_expander(char *line, int dq);
+char		*expand_hrdc(int i, int j, char *name_file, char *file);
+int			ft_open(t_enum type, char **file);
+void		put_in_fd(char *del, int fd, int nbdel);
+
+void		*ft_malloc(unsigned int size, void (*add_garbage)(void *));
+void		add_garbage_in(void *data);
+void		add_garbage_out(void *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:49:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/30 17:30:13 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 02:16:05 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int	ft_get_path(char *cmd)
 		if (!path)
 			return (error_msg("minishell: cd: ", "OLDPWD", " not set"), 1);
 		printf("%s\n", path);
+		i = chdir(path);
+	}
+	else if (!ft_strcmp(cmd, "~"))
+	{
+		path = find_env("HOME");
+		if (!path)
+			return (error_msg("minishell: cd: ", "HOME", " not set"), 0);
 		i = chdir(path);
 	}
 	else
@@ -58,7 +65,7 @@ void	change_enirement_pwd(void)
 	t_env	*tmp;
 
 	getcwd(buffer, 1024);
-	str = ft_strdup(buffer);
+	str = ft_strdup_out(buffer);
 	tmp = g_data.g_envlst;
 	while (tmp)
 	{
@@ -85,7 +92,7 @@ void	ft_built_cd(char **str)
 	char	s[1024];
 
 	getcwd(s, 1024);
-	old_pwd = ft_strdup(s);
+	old_pwd = ft_strdup_out(s);
 	if (!str[1])
 	{
 		path = find_env("HOME");

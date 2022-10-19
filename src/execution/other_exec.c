@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 01:33:46 by ibenmain          #+#    #+#             */
-/*   Updated: 2022/09/27 12:08:51 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:02:14 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,18 @@ char	*ft_add_slache(char *cmd, char c)
 
 	if (!cmd)
 	{
-		tmp = malloc(sizeof(char *) * 2);
-		if (!tmp)
-			return (NULL);
+		tmp = ft_malloc(sizeof(char *) * 2, add_garbage_in);
 		tmp[0] = c;
 		tmp[1] = '\0';
 		return (tmp);
 	}
 	len = ft_strlen(cmd);
-	tmp = malloc(sizeof(char *) * len + 2);
-	if (!tmp)
-		return (NULL);
+	tmp = ft_malloc(sizeof(char *) * len + 2, add_garbage_in);
 	ft_strlcpy(tmp, cmd, len + 1);
 	tmp[len] = c;
 	tmp[len + 1] = '\0';
 	return (tmp);
 }
-
-// char	*get_path(char *cmd)
-// {
-// 	char	*path;
-// 	char	**tab;
-// 	char	*retn;
-// 	int		i;
-
-// 	i = -1;
-// 	retn = NULL;
-// 	if (!cmd || !*cmd || !g_data.g_envlst)
-// 		return (NULL);
-// 	path = find_env("PATH");
-// 	tab = ft_split(path, ':');
-// 	while (tab[++i])
-// 	{
-// 		if (tab[i])
-// 		{
-// 			tab[i] = ft_add_slache(tab[i], '/');
-// 			tab[i] = concat(tab[i], cmd);
-// 			if (!retn)
-// 				retn = tab[i];
-// 		}
-// 		else
-// 			return (NULL);
-// 	}
-// 	return (retn);
-// }
 
 char	**ft_copy_env(void)
 {
@@ -74,7 +42,7 @@ char	**ft_copy_env(void)
 	i = -1;
 	tmp = g_data.g_envlst;
 	len = ft_lstsize();
-	tab = (char **)malloc(sizeof(char *) * len + 1);
+	tab = (char **)ft_malloc(sizeof(char *) * (len + 1), add_garbage_in);
 	if (!tab || !tmp)
 		return (NULL);
 	while (tmp)

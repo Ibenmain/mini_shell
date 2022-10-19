@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_char_str.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:33:48 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/26 12:28:57 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:12:04 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include<unistd.h>
 # include<fcntl.h>
 # include <stdbool.h>
+# include <signal.h>
+# include <paths.h>
 # include "readline/readline.h"
 # include "readline/history.h"
 # include "parsing.h"
@@ -36,15 +38,19 @@
 # define CHR_UNSCR '_'
 # define CHR_DLR '$'
 # define CHR_EQL '='
+# define STR_EQL "="
 # define STR_SPC " "
 # define STR_OUTR ">"
 # define STR_INR "<"
 # define STR_APND ">>"
 # define STR_HRDC "<<"
 # define STR_STRNULL ""
-
+# define STR_0 "0"
 # define STR_TKN_VALS "><|\"\' "
-
+# define STR_PWD "PWD"
+# define STR_SHLVL "SHLVL"
+# define PTH_ENV "/usr/bin/env"
+# define STR_SPECIAL "$+,~^=}]/:\'\"%."
 # define STR_PROMPT "Minishell ✗ "
 # define STR_PERR "Minishell: syntax error near unexpected token ` | '\n"
 # define STR_QTERR "Minishell: syntax error in unexpected token `quotes'\n"

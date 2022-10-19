@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:06:22 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 20:51:44 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:55:18 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ char	*ft_itoa(int n)
 
 	tmp = n;
 	size = ft_nbrlen(tmp);
-	itoa = (char *)malloc(size + 1);
-	if (!itoa)
-		return (NULL);
+	itoa = (char *)ft_malloc(size + 1, add_garbage_out);
 	itoa[size--] = '\0';
 	if (n == 0)
 		itoa[size] = '0';

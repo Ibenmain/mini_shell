@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_list_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:04:31 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 12:41:34 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:57:19 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ t_execlst	*init_execlst(void)
 {
 	t_execlst	*e;
 
-	e = malloc(sizeof(t_execlst));
-	if (!e)
-		return (NULL);
+	e = ft_malloc(sizeof(t_execlst), add_garbage_in);
 	e->cmd = NULL;
 	e->red = NULL;
 	e->next = NULL;
@@ -37,15 +35,13 @@ t_execlst	*getcmd(t_execlst *e, char *val)
 	i = 0;
 	while (e->cmd && e->cmd[i])
 		i++;
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		return (NULL);
+	new = ft_malloc(sizeof(char *) * (i + 2), add_garbage_in);
 	new[i + 1] = NULL;
-	new[i] = val;//expander(NULL, val, 0);
+	new[i] = val;
 	if (!new[i])
 		return (NULL);
 	while (--i >= 0 && e->cmd[i])
-		new[i] = e->cmd[i];//expander(NULL, e->cmd[i], 0);
+		new[i] = e->cmd[i];
 	return (e->cmd = new, e);
 }
 
@@ -66,9 +62,7 @@ t_red	*new_red(t_tok *tok)
 {
 	t_red	*head;
 
-	head = malloc(sizeof(t_red));
-	if (!head)
-		return (NULL);
+	head = ft_malloc(sizeof(t_red), add_garbage_in);
 	head->type = get_redtype(tok->value);
 	head->file = tok->next->value;
 	head->next = NULL;

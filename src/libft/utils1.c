@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaouzi <kfaouzi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 15:15:29 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/27 12:40:24 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:12:41 by kfaouzi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(char *l)
 {
 	int	i;
 
 	i = 0;
-	if (str)
-		while (str[i])
-			i++;
+	while (l[i])
+		i++;
 	return (i);
 }
 
 int	ft_strchr(char *s, char c)
 {
-	while (*s)
+	int	i;
+
+	i = 0;
+	while (s[i])
 	{
-		if ((char)*s == c)
+		if ((char)s[i] == c)
 			return (1);
-		s++;
+		i += 1;
 	}
-	if (*s == c)
+	if (s[i] == c)
 		return (1);
 	return (0);
 }
@@ -66,9 +68,7 @@ char	*ft_strdup_trim(char *s1, char *set)
 	int		j;
 	int		k;
 
-	trim = malloc(ft_strlen_trim(s1, set) + 1);
-	if (!trim)
-		return (NULL);
+	trim = ft_malloc(ft_strlen_trim(s1, set) + 1, add_garbage_in);
 	k = 0;
 	i = 0;
 	j = ft_strlen(s1) - 1;

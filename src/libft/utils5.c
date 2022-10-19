@@ -6,37 +6,11 @@
 /*   By: ibenmain <ibenmain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 16:55:58 by kfaouzi           #+#    #+#             */
-/*   Updated: 2022/09/24 18:36:38 by ibenmain         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:13:51 by ibenmain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils_char_str.h"
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	size_t	str_len;
-	size_t	i;
-	char	*new;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	str_len = ft_strlen(s);
-	if (start >= str_len)
-		new = malloc(1);
-	else
-	{
-		if (len > str_len)
-			len = str_len;
-		new = (char *)malloc((len + 1) * sizeof(char));
-		if (!new)
-			return (NULL);
-		while (i < len)
-			new[i++] = s[start++];
-	}
-	new[i] = '\0';
-	return (new);
-}
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -80,9 +54,24 @@ char	*ft_strdup(char *s1)
 	int		i;
 
 	i = 0;
-	new = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
+	new = (char *)ft_malloc((ft_strlen(s1) + 1) * sizeof(char), add_garbage_in);
+	while (s1[i] != '\0')
+	{
+		new[i] = s1[i];
+		i++;
+	}	
+	new[i] = '\0';
+	return (new);
+}
+
+char	*ft_strdup_out(char *s1)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = (char *)ft_malloc((ft_strlen(s1) + 1) * \
+		sizeof(char), add_garbage_out);
 	while (s1[i] != '\0')
 	{
 		new[i] = s1[i];
